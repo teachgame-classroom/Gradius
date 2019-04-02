@@ -3,7 +3,7 @@ guid: e8d7b4143e4eeb8458b100e240054414
 TextureImporter:
   fileIDToRecycleName:
     21300000: Arcade - Gradius - Everything_0
-    21300002: Arcade - Gradius - Everything_1
+    21300002: Explosion_Red_3
     21300004: Arcade - Gradius - Everything_2
     21300006: Arcade - Gradius - Everything_3
     21300008: Arcade - Gradius - Everything_4
@@ -311,11 +311,11 @@ TextureImporter:
     21300612: Arcade - Gradius - Everything_306
     21300614: Arcade - Gradius - Everything_307
     21300616: Arcade - Gradius - Everything_308
-    21300618: Arcade - Gradius - Everything_309
+    21300618: Explosion_Red_0
     21300620: Arcade - Gradius - Everything_310
     21300622: Arcade - Gradius - Everything_311
-    21300624: Arcade - Gradius - Everything_312
-    21300626: Arcade - Gradius - Everything_313
+    21300624: Explosion_Red_2
+    21300626: Explosion_Red_4
     21300628: Arcade - Gradius - Everything_314
     21300630: Arcade - Gradius - Everything_315
     21300632: Arcade - Gradius - Everything_316
@@ -325,7 +325,7 @@ TextureImporter:
     21300640: Arcade - Gradius - Everything_320
     21300642: Arcade - Gradius - Everything_321
     21300644: Arcade - Gradius - Everything_322
-    21300646: Arcade - Gradius - Everything_323
+    21300646: Explosion_Red_1
     21300648: Arcade - Gradius - Everything_324
     21300650: Arcade - Gradius - Everything_325
     21300652: Arcade - Gradius - Everything_326
@@ -1462,8 +1462,8 @@ TextureImporter:
         y: 748
         width: 15
         height: 15
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.53447354, y: 0.46380207}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -6735,7 +6735,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Arcade - Gradius - Everything_309
+      name: Explosion_Red_0
       rect:
         serializedVersion: 2
         x: 228
@@ -6755,52 +6755,12 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Arcade - Gradius - Everything_310
-      rect:
-        serializedVersion: 2
-        x: 248
-        y: 389
-        width: 5
-        height: 4
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 492434a150fa6424c9516bd4d4d9da49
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Arcade - Gradius - Everything_311
-      rect:
-        serializedVersion: 2
-        x: 255
-        y: 391
-        width: 7
-        height: 4
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7857cedec3f511c408b8d2e722959ee0
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Arcade - Gradius - Everything_312
+      name: Explosion_Red_2
       rect:
         serializedVersion: 2
         x: 266
         y: 382
-        width: 25
+        width: 13
         height: 13
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -6815,13 +6775,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Arcade - Gradius - Everything_313
+      name: Explosion_Red_4
       rect:
         serializedVersion: 2
-        x: 296
-        y: 381
-        width: 23
-        height: 12
+        x: 295
+        y: 384
+        width: 8
+        height: 8
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -7015,13 +6975,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Arcade - Gradius - Everything_323
+      name: Explosion_Red_1
       rect:
         serializedVersion: 2
-        x: 248
-        y: 380
-        width: 14
-        height: 11
+        x: 247
+        y: 379
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -11222,8 +11182,8 @@ TextureImporter:
         y: 816
         width: 9
         height: 2
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -11242,8 +11202,8 @@ TextureImporter:
         y: 816
         width: 9
         height: 2
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -11310,6 +11270,46 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 1a8ca8de4b4f04c4894088c802b49132
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arcade - Gradius - Everything_0
+      rect:
+        serializedVersion: 2
+        x: 307
+        y: 381
+        width: 12
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 17321b5185d4d1c45aef654e50485c64
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Explosion_Red_3
+      rect:
+        serializedVersion: 2
+        x: 283
+        y: 384
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dc5007ba905eee94bb3f3fd18ee968ce
       vertices: []
       indices: 
       edges: []

@@ -6,12 +6,15 @@ public class VicViper : MonoBehaviour
 {
     public float speed = 10;
 
+    private Transform shotPosTrans;
+
     private GameObject[] bullets;
 
     // Start is called before the first frame update
     void Start()
     {
         bullets = Resources.LoadAll<GameObject>("Prefabs/Bullets");
+        shotPosTrans = transform.Find("ShotPos");
     }
 
     // Update is called once per frame
@@ -30,6 +33,11 @@ public class VicViper : MonoBehaviour
 
     void Shoot()
     {
-        Instantiate(bullets[0], transform.position, Quaternion.identity);
+        Instantiate(bullets[0], shotPosTrans.position, Quaternion.identity);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Debug.Log("碰到了" + collision.gameObject.name);
     }
 }
