@@ -160,12 +160,12 @@ TextureImporter:
     21300310: Arcade - Gradius - Everything_155
     21300312: Arcade - Gradius - Everything_156
     21300314: Arcade - Gradius - Everything_157
-    21300316: Arcade - Gradius - Everything_158
-    21300318: Arcade - Gradius - Everything_159
-    21300320: Arcade - Gradius - Everything_160
-    21300322: Arcade - Gradius - Everything_161
-    21300324: Arcade - Gradius - Everything_162
-    21300326: Arcade - Gradius - Everything_163
+    21300316: Enemy_4_0
+    21300318: Enemy_4_1
+    21300320: Enemy_4_2
+    21300322: Enemy_4_3
+    21300324: Enemy_4_4
+    21300326: Enemy_4_5
     21300328: Arcade - Gradius - Everything_164
     21300330: Arcade - Gradius - Everything_165
     21300332: Arcade - Gradius - Everything_166
@@ -246,7 +246,7 @@ TextureImporter:
     21300482: Arcade - Gradius - Everything_241
     21300484: Arcade - Gradius - Everything_242
     21300486: Arcade - Gradius - Everything_243
-    21300488: Arcade - Gradius - Everything_244
+    21300488: Bullet_10
     21300490: Arcade - Gradius - Everything_245
     21300492: Arcade - Gradius - Everything_246
     21300494: Arcade - Gradius - Everything_247
@@ -3715,7 +3715,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Arcade - Gradius - Everything_158
+      name: Enemy_4_0
       rect:
         serializedVersion: 2
         x: 7
@@ -3735,12 +3735,12 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Arcade - Gradius - Everything_159
+      name: Enemy_4_1
       rect:
         serializedVersion: 2
         x: 31
         y: 635
-        width: 20
+        width: 21
         height: 15
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -3755,12 +3755,12 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Arcade - Gradius - Everything_160
+      name: Enemy_4_2
       rect:
         serializedVersion: 2
         x: 54
         y: 635
-        width: 20
+        width: 21
         height: 15
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -3775,12 +3775,12 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Arcade - Gradius - Everything_161
+      name: Enemy_4_3
       rect:
         serializedVersion: 2
         x: 77
         y: 635
-        width: 20
+        width: 21
         height: 15
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -3795,12 +3795,12 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Arcade - Gradius - Everything_162
+      name: Enemy_4_4
       rect:
         serializedVersion: 2
-        x: 100
+        x: 99
         y: 635
-        width: 19
+        width: 21
         height: 15
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -3815,13 +3815,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Arcade - Gradius - Everything_163
+      name: Enemy_4_5
       rect:
         serializedVersion: 2
-        x: 122
+        x: 120
         y: 635
-        width: 18
-        height: 16
+        width: 21
+        height: 15
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -5435,7 +5435,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Arcade - Gradius - Everything_244
+      name: Bullet_10
       rect:
         serializedVersion: 2
         x: 345
