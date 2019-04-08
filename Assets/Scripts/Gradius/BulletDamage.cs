@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class BulletDamage : MonoBehaviour
 {
+    public bool isLaser;
+    public int laserCount;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,7 +29,20 @@ public class BulletDamage : MonoBehaviour
         {
             // 打中的是敌人
             enemy.Hurt(10);
-            Destroy(gameObject);
+
+            if(isLaser == false)
+            {
+                Destroy(gameObject);
+            }
+            else
+            {
+                laserCount--;
+
+                if(laserCount == 0)
+                {
+                    Destroy(gameObject);
+                }
+            }
         }
     }
 }

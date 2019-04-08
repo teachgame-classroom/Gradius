@@ -183,7 +183,7 @@ public class Enemy : MonoBehaviour
         float angle = Vector3.Angle(Vector3.right, aimDirection) + 7.5f;
 
         int spriteIdx = Mathf.FloorToInt(angle / 15);
-        Debug.Log("Aim Angle:" + angle + ", idx:" + spriteIdx);
+        //Debug.Log("Aim Angle:" + angle + ", idx:" + spriteIdx);
 
         spriteRenderer.sprite = turrentSprites[spriteIdx];
 
