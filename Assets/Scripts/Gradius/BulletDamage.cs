@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BulletDamage : MonoBehaviour
 {
+    public bool isBarrier;
     public bool isLaser;
     public int laserCount;
 
@@ -32,7 +33,10 @@ public class BulletDamage : MonoBehaviour
 
             if(isLaser == false)
             {
-                Destroy(gameObject);
+                if(isBarrier == false)
+                {
+                    Destroy(gameObject);
+                }
             }
             else
             {

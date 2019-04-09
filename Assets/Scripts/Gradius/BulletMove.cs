@@ -6,6 +6,7 @@ public class BulletMove : MonoBehaviour
 {
     public float speed = 15;
     public bool isMissile;
+    public bool isBarrier;
     public Vector3 moveDirection;
 
     private string[] stageLayerMask = new string[] { "Stage" };
@@ -31,7 +32,14 @@ public class BulletMove : MonoBehaviour
             }
         }
 
-        transform.Translate(moveDirection * speed * Time.deltaTime, Space.World);
+        if(isBarrier)
+        {
+            transform.RotateAround(transform.parent.position, Vector3.forward, speed * Time.deltaTime);
+        }
+        else
+        {
+            transform.Translate(moveDirection * speed * Time.deltaTime, Space.World);
+        }
     }
 
     Vector3 GetGroundNormal()

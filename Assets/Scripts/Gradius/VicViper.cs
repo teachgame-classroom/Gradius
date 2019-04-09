@@ -46,22 +46,24 @@ public class VicViper : MonoBehaviour
 
         transform.position += (Vector3.right * h + Vector3.up * v) * speed * Time.deltaTime;
 
+        ClampPlayerPosition();
+
         UpdateTrackList();
 
         options[0].position = Vector3.MoveTowards(options[0].position, trackList[0], speed * Time.deltaTime);
-        options[1].position = Vector3.MoveTowards(options[1].position, trackList[trackList.Count/2], speed * Time.deltaTime);
+        options[1].position = Vector3.MoveTowards(options[1].position, trackList[trackList.Count / 2], speed * Time.deltaTime);
 
         if (Input.GetKeyDown(KeyCode.J))
         {
             Shoot();
         }
 
-        if(Input.GetKeyDown(KeyCode.K))
+        if (Input.GetKeyDown(KeyCode.K))
         {
             TryPowerUp();
         }
 
-        if(Input.GetKeyDown(KeyCode.Alpha1))
+        if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             ChangePrimaryWeapon(PrimaryWeaponType.Normal);
         }
@@ -75,6 +77,23 @@ public class VicViper : MonoBehaviour
         {
             ChangePrimaryWeapon(PrimaryWeaponType.Laser);
         }
+    }
+
+    private void ClampPlayerPosition()
+    {
+        Vector3 camPos = Camera.main.transform.position;
+
+        float left = camPos.x - Camera.main.orthographicSize * Camera.main.aspect + 0.5f;
+        float right = camPos.x + Camera.main.orthographicSize * Camera.main.aspect - 0.5f;
+        float top = camPos.y + Camera.main.orthographicSize - 0.5f;
+        float bottom = camPos.y - Camera.main.orthographicSize + 0.5f;
+
+        float clamp_x = Mathf.Clamp(transform.position.x, left, right);
+        float clamp_y = Mathf.Clamp(transform.position.y, bottom, top);
+
+        Vector3 clampPos = Vector3.right * clamp_x + Vector3.up * clamp_y;
+
+        transform.position = clampPos;
     }
 
     void Shoot()
@@ -118,6 +137,7 @@ public class VicViper : MonoBehaviour
             case 5:
                 break;
             case 6:
+                PowerUpBarrier();
                 break;
         }
     }
@@ -149,7 +169,6 @@ public class VicViper : MonoBehaviour
         
         Instantiate(bullets[NORMAL], options[1].position, Quaternion.identity);
         Instantiate(bullets[NORMAL], options[1].position, Quaternion.Euler(0, 0, 45));
-
     }
 
     void ShootLaser()
@@ -178,6 +197,13 @@ public class VicViper : MonoBehaviour
             missileLevel++;
             powerup -= MISSILE;
         }
+    }
+
+    void PowerUpBarrier()
+    {
+        transform.Find("Bullet_4_1").gameObject.SetActive(true);
+        transform.Find("Bullet_4_2").gameObject.SetActive(true);
+        powerup = 0;
     }
 
     void UpdateTrackList()
