@@ -16,6 +16,11 @@ public class SquadonManager : MonoBehaviour
     private GameObject[] members;       // 小队中的全部敌人
     private int[] memberWaypointIdx;    // 每个敌人的当前移动路径点
 
+    private GameObject player;        // 存放玩家
+    private bool isMemberActivated;   // 小队成员是否已经被激活
+
+    private float activeDistance;   // 激活小队成员的摄像机距离
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,6 +41,8 @@ public class SquadonManager : MonoBehaviour
             // 将本小队设定为小队每个成员的“所属小队”
             // 小队成员被消灭时，会通过这个变量调用自己所属小队的OnMemberDestroy方法，通知所属小队，自己已经被消灭
             members[i].GetComponent<Enemy>().squadonManager = this;
+
+            members[i].SetActive(false);
         }
 
         // 查找所有子对象，存放到waypoints数组，这些就是路径点
@@ -45,19 +52,52 @@ public class SquadonManager : MonoBehaviour
         {
             waypoints[i] = transform.GetChild(i);
         }
+
+        player = GameObject.Find("Vic Viper");
+
+        // 激活小队成员的摄像机距离 = 摄像机宽度的一半 + 一个单位
+        activeDistance = Camera.main.orthographicSize * Camera.main.aspect + 1;
     }
 
     // Update is called once per frame
     void Update()
     {
-        // 让每个小队成员沿路径点移动
-        for(int i = 0; i < members.Length; i++)
+        if(!isMemberActivated)
         {
-            if(members[i] != null)
+            if(IsPlayerCloseEnough())
             {
-                members[i].transform.position = MoveAlongPath(members[i].transform.position, i);
+                ActivateMembers();
             }
         }
+        else
+        {
+            // 让每个小队成员沿路径点移动
+            for (int i = 0; i < members.Length; i++)
+            {
+                if (members[i] != null)
+                {
+                    members[i].transform.position = MoveAlongPath(members[i].transform.position, i);
+                }
+            }
+        }
+    }
+
+    // 检查摄像机与生成点的距离，如果小于激活距离，返回true，否则返回false
+    private bool IsPlayerCloseEnough()
+    {
+        float playerDistanceX = transform.position.x - Camera.main.transform.position.x;
+
+        return playerDistanceX < activeDistance;
+    }
+
+    private void ActivateMembers()
+    {
+        for(int i = 0; i < members.Length; i++)
+        {
+            members[i].SetActive(true);
+        }
+
+        isMemberActivated = true;
     }
 
     // 计算某个小队成员沿路径移动的位置，currentPosition-当前位置，memberIdx-成员编号

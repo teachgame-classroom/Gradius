@@ -27,7 +27,7 @@ public class Enemy : MonoBehaviour
 
     private float lastChangeDirectionTime = 0;
 
-    private int hp = 1;
+    public int hp = 1;
     private GameObject explosionPrefab;
 
     public SquadonManager squadonManager;   // 此敌人的所属小队，敌人生成的时候由所属小队脚本指定
@@ -47,6 +47,13 @@ public class Enemy : MonoBehaviour
     public float fireInterval;
     private float lastFireTime;
 
+    public bool waitForPlayer;
+
+    private bool activated;
+    private float activeDistance;   // 激活此敌人的摄像机距离
+
+    private Collider2D col;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -63,45 +70,84 @@ public class Enemy : MonoBehaviour
 
         spriteRenderer = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
+        col = GetComponent<Collider2D>();
+
+        // 激活敌人的摄像机距离 = 摄像机宽度的一半 + 一个单位
+        activeDistance = Camera.main.orthographicSize * Camera.main.aspect + 1;
+
+        if (waitForPlayer)
+        {
+            SetEnemyActive(false);
+        }
+        else
+        {
+            SetEnemyActive(true);
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(squadonManager == null)
+        // 敌人还没激活时，检查摄像机距离，判断玩家是否已经接近，如果已经足够接近，就激活敌人
+        if(!activated)
         {
-            // 在没有所属小队的情况下，每个敌人自行移动
-            switch(movePattern)
+            if(IsPlayerCloseEnough())
             {
-                case MovePattern.Straight:
-                    StraightMove();
-                    break;
-                case MovePattern.ZigZag:
-                    ZigSawMove();
-                    break;
-                case MovePattern.Sine:
-                    SineMove();
-                    break;
-                case MovePattern.Static:
-                    StaticMove();
-                    break;
+                SetEnemyActive(true);
             }
-
-            if(Time.time - lastRecordTime > 0.1f)
+        }
+        else
+        {
+            if (squadonManager == null)
             {
-                tracks.Add(transform.position);
-                if(tracks.Count > 48)
+                // 在没有所属小队的情况下，每个敌人自行移动
+                switch (movePattern)
                 {
-                    tracks.RemoveAt(0);
+                    case MovePattern.Straight:
+                        StraightMove();
+                        break;
+                    case MovePattern.ZigZag:
+                        ZigSawMove();
+                        break;
+                    case MovePattern.Sine:
+                        SineMove();
+                        break;
+                    case MovePattern.Static:
+                        StaticMove();
+                        break;
                 }
-                lastRecordTime = Time.time;
+
+                if (Time.time - lastRecordTime > 0.1f)
+                {
+                    tracks.Add(transform.position);
+                    if (tracks.Count > 48)
+                    {
+                        tracks.RemoveAt(0);
+                    }
+                    lastRecordTime = Time.time;
+                }
+            }
+
+            if (bulletPrefab != null)
+            {
+                Shoot();
             }
         }
+    }
 
-        if(bulletPrefab != null)
-        {
-            Shoot();
-        }
+    private void SetEnemyActive(bool isActive)
+    {
+        spriteRenderer.enabled = isActive;
+        col.enabled = isActive;
+        activated = isActive;
+    }
+
+    // 检查摄像机与生成点的距离，如果小于激活距离，返回true，否则返回false
+    private bool IsPlayerCloseEnough()
+    {
+        float playerDistanceX = transform.position.x - Camera.main.transform.position.x;
+
+        return playerDistanceX < activeDistance;
     }
 
     void StaticMove()
@@ -223,7 +269,17 @@ public class Enemy : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        //Gizmos.color = trackColor;
+        if(!activated)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawSphere(transform.position, 0.15f);
+        }
+
+        if(movePattern == MovePattern.Straight)
+        {
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawLine(transform.position, transform.position + GetStraightMoveDirection() * straightMoveDistance);
+        }
 
         //for(int i = 0; i < tracks.Count; i++)
         //{

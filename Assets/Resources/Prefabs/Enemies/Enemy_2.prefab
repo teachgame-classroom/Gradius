@@ -141,6 +141,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fb07359fae0ce549b1c2cbe838190e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movePattern: 0
-  speed: 10
+  movePattern: 2
+  straightMoveDirection: 0
+  straightMoveDistance: 0
+  speed: 3
+  changeDirectionPeriod: 1
+  sineAmp: 4
+  trackColor: {r: 1, g: 1, b: 1, a: 1}
+  hp: 1
   squadonManager: {fileID: 0}
+  turrentSprites: []
+  bulletPrefab: {fileID: 0}
+  fireInterval: 0
+  waitForPlayer: 1

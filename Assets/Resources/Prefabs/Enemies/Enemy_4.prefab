@@ -121,10 +121,13 @@ MonoBehaviour:
   changeDirectionPeriod: 1
   sineAmp: 1
   trackColor: {r: 1, g: 1, b: 1, a: 1}
+  hp: 1
   squadonManager: {fileID: 0}
   turrentSprites: []
-  bulletPrefab: {fileID: 0}
-  fireInterval: 0
+  bulletPrefab: {fileID: 7789516539089122690, guid: f516c4dc03186af4fb37bd3de82d04e5,
+    type: 3}
+  fireInterval: 2
+  waitForPlayer: 1
 --- !u!61 &1888343221786598457
 BoxCollider2D:
   m_ObjectHideFlags: 0
