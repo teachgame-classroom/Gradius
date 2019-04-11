@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - PowerUp
+  - Stage
+  - Enemy
+  - EnemyBullet
   layers:
   - Default
   - TransparentFX

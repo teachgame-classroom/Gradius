@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 596228532486207606}
   m_Layer: 0
   m_Name: Enemy_1
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -162,5 +162,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movePattern: 0
+  straightMoveDirection: 0
+  straightMoveDistance: 0
   speed: 10
+  changeDirectionPeriod: 1
+  sineAmp: 1
+  trackColor: {r: 1, g: 1, b: 1, a: 1}
+  hp: 1
   squadonManager: {fileID: 0}
+  turrentSprites: []
+  bulletPrefab: {fileID: 0}
+  fireInterval: 0
+  waitForPlayer: 0
+  dropPowerUp: 0

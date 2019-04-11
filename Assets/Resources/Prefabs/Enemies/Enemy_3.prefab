@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8850614027598365960}
   m_Layer: 0
   m_Name: Enemy_3
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -101,6 +101,7 @@ MonoBehaviour:
   changeDirectionPeriod: 1
   sineAmp: 1
   trackColor: {r: 1, g: 1, b: 1, a: 1}
+  hp: 1
   squadonManager: {fileID: 0}
   turrentSprites:
   - {fileID: 21300256, guid: e8d7b4143e4eeb8458b100e240054414, type: 3}

@@ -54,9 +54,12 @@ public class Enemy : MonoBehaviour
 
     private Collider2D col;
 
+    public bool dropPowerUp = true;
+    private GameObject powerupPrefab;
     // Start is called before the first frame update
     void Start()
     {
+        powerupPrefab = Resources.Load<GameObject>("Prefabs/PowerUp");
         explosionPrefab = Resources.Load<GameObject>("Prefabs/Effects/Explosion_Red");
 
         player = GameObject.Find("Vic Viper");
@@ -264,6 +267,12 @@ public class Enemy : MonoBehaviour
         }
 
         Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+
+        if(dropPowerUp)
+        {
+            Instantiate(powerupPrefab, transform.position, Quaternion.identity);
+        }
+
         Destroy(gameObject);
     }
 

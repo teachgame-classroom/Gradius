@@ -10,16 +10,28 @@ public class VicViper : MonoBehaviour
     public const int LASER = 1;
     public const int MISSILE = 2;
 
-    public float speed = 10;
+    public int life = 99;
+
+    public float baseSpeed = 10;
+    private float speed;
     public PrimaryWeaponType primaryWeapon;
 
+    private bool isJustSpawned = true;
+    private float lastSpawnTime = 0;
+    private float lastBlinkTime = 0;
+    private int speedLevel = 0;
     private int missileLevel = 0;
+    private int optionLevel = 0;
 
     private int powerup = 0;
 
     private Transform shotPosTrans;
+    private Transform spawnTrans;
+    private Collider2D col;
+    private SpriteRenderer spriteRenderer;
 
     private GameObject[] bullets;
+    private GameObject dieEffectPrefab;
 
     public Transform[] options;
 
@@ -32,50 +44,93 @@ public class VicViper : MonoBehaviour
     void Start()
     {
         bullets = Resources.LoadAll<GameObject>("Prefabs/Bullets");
+        dieEffectPrefab = Resources.Load<GameObject>("Prefabs/Effects/Explosion_player");
         shotPosTrans = transform.Find("ShotPos");
+
+        col = GetComponent<Collider2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
+        spawnTrans = Camera.main.transform.Find("PlayerSpawn");
         //options = GameObject.Find("Option").transform;
 
         trackList.Add(transform.position);
+
+        Spawn();
     }
 
     // Update is called once per frame
     void Update()
     {
-        float h = Input.GetAxis("Horizontal");
-        float v = Input.GetAxis("Vertical");
-
-        transform.position += (Vector3.right * h + Vector3.up * v) * speed * Time.deltaTime;
-
-        ClampPlayerPosition();
-
-        UpdateTrackList();
-
-        options[0].position = Vector3.MoveTowards(options[0].position, trackList[0], speed * Time.deltaTime);
-        options[1].position = Vector3.MoveTowards(options[1].position, trackList[trackList.Count / 2], speed * Time.deltaTime);
-
-        if (Input.GetKeyDown(KeyCode.J))
+        // 重生5秒后打开碰撞体，使玩家可以被伤害
+        if(Time.time - lastSpawnTime < 5)
         {
-            Shoot();
+            if(Time.time - lastBlinkTime > 0.1f)
+            {
+                spriteRenderer.enabled = !spriteRenderer.enabled;
+                lastBlinkTime = Time.time;
+            }
+        }
+        else
+        {
+            if(col.enabled == false)
+            {
+                spriteRenderer.enabled = true;
+                col.enabled = true;
+            }
         }
 
-        if (Input.GetKeyDown(KeyCode.K))
+        if(isJustSpawned)
         {
-            TryPowerUp();
-        }
+            if(Time.time - lastSpawnTime > 1)
+            {
+                transform.position += Vector3.right * speed * Time.deltaTime;
 
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            ChangePrimaryWeapon(PrimaryWeaponType.Normal);
+                float distanceToCamera = Camera.main.transform.position.x - transform.position.x;
+                float distanceToExitSpawnState = Camera.main.orthographicSize * Camera.main.aspect * 0.75f;
+                if (distanceToCamera < distanceToExitSpawnState)
+                {
+                    isJustSpawned = false;
+                }
+            }
         }
-
-        if (Input.GetKeyDown(KeyCode.Alpha2))
+        else
         {
-            ChangePrimaryWeapon(PrimaryWeaponType.Double);
-        }
+            float h = Input.GetAxis("Horizontal");
+            float v = Input.GetAxis("Vertical");
 
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            ChangePrimaryWeapon(PrimaryWeaponType.Laser);
+            transform.position += (Vector3.right * h + Vector3.up * v) * speed * Time.deltaTime;
+
+            ClampPlayerPosition();
+
+            UpdateTrackList();
+
+            options[0].position = Vector3.MoveTowards(options[0].position, trackList[0], speed * Time.deltaTime);
+            options[1].position = Vector3.MoveTowards(options[1].position, trackList[trackList.Count / 2], speed * Time.deltaTime);
+
+            if (Input.GetKeyDown(KeyCode.J))
+            {
+                Shoot();
+            }
+
+            if (Input.GetKeyDown(KeyCode.K))
+            {
+                TryPowerUp();
+            }
+
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                ChangePrimaryWeapon(PrimaryWeaponType.Normal);
+            }
+
+            if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                ChangePrimaryWeapon(PrimaryWeaponType.Double);
+            }
+
+            if (Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                ChangePrimaryWeapon(PrimaryWeaponType.Laser);
+            }
         }
     }
 
@@ -114,8 +169,14 @@ public class VicViper : MonoBehaviour
         if(missileLevel > 0)
         {
             ShootMissile(shotPosTrans);
-            ShootMissile(options[0]);
-            ShootMissile(options[1]);
+
+            for (int i = 0; i < optionLevel; i++)
+            {
+                ShootMissile(options[i]);
+            }
+
+            //ShootMissile(options[0]);
+            //ShootMissile(options[1]);
         }
     }
 
@@ -124,6 +185,7 @@ public class VicViper : MonoBehaviour
         switch (powerup)
         {
             case 1:
+                PowerUPSpeed();
                 break;
             case 2:
                 PowerUpMissile();
@@ -135,6 +197,7 @@ public class VicViper : MonoBehaviour
                 ChangePrimaryWeapon(PrimaryWeaponType.Laser);
                 break;
             case 5:
+                PowerUpOption();
                 break;
             case 6:
                 PowerUpBarrier();
@@ -155,8 +218,11 @@ public class VicViper : MonoBehaviour
     {
         Instantiate(bullets[NORMAL], shotPosTrans.position, Quaternion.identity);
 
-        Instantiate(bullets[NORMAL], options[0].position, Quaternion.identity);
-        Instantiate(bullets[NORMAL], options[1].position, Quaternion.identity);
+        for(int i = 0; i < optionLevel; i++)
+        {
+            Instantiate(bullets[NORMAL], options[i].position, Quaternion.identity);
+        }
+        //Instantiate(bullets[NORMAL], options[1].position, Quaternion.identity);
     }
 
     void ShootDouble()
@@ -164,20 +230,31 @@ public class VicViper : MonoBehaviour
         Instantiate(bullets[NORMAL], shotPosTrans.position, Quaternion.identity);
         Instantiate(bullets[NORMAL], shotPosTrans.position, Quaternion.Euler(0,0,45));
 
-        Instantiate(bullets[NORMAL], options[0].position, Quaternion.identity);
-        Instantiate(bullets[NORMAL], options[0].position, Quaternion.Euler(0, 0, 45));
+        for (int i = 0; i < optionLevel; i++)
+        {
+            Instantiate(bullets[NORMAL], options[i].position, Quaternion.identity);
+            Instantiate(bullets[NORMAL], options[i].position, Quaternion.Euler(0, 0, 45));
+        }
+
+
+        //Instantiate(bullets[NORMAL], options[0].position, Quaternion.identity);
+        //Instantiate(bullets[NORMAL], options[0].position, Quaternion.Euler(0, 0, 45));
         
-        Instantiate(bullets[NORMAL], options[1].position, Quaternion.identity);
-        Instantiate(bullets[NORMAL], options[1].position, Quaternion.Euler(0, 0, 45));
+        //Instantiate(bullets[NORMAL], options[1].position, Quaternion.identity);
+        //Instantiate(bullets[NORMAL], options[1].position, Quaternion.Euler(0, 0, 45));
     }
 
     void ShootLaser()
     {
         Instantiate(bullets[LASER], shotPosTrans.position, Quaternion.identity);
 
-        Instantiate(bullets[LASER], options[0].position, Quaternion.identity);
-        Instantiate(bullets[LASER], options[1].position, Quaternion.identity);
+        for (int i = 0; i < optionLevel; i++)
+        {
+            Instantiate(bullets[LASER], options[i].position, Quaternion.identity);
+        }
 
+        //Instantiate(bullets[LASER], options[0].position, Quaternion.identity);
+        //Instantiate(bullets[LASER], options[1].position, Quaternion.identity);
     }
 
     void ShootMissile(Transform firePos)
@@ -190,6 +267,16 @@ public class VicViper : MonoBehaviour
         }
     }
 
+    void PowerUPSpeed()
+    {
+        powerup = 0;
+
+        speedLevel++;
+        speedLevel = Mathf.Min(5, speedLevel);
+
+        SetSpeed();
+    }
+
     void PowerUpMissile()
     {
         if(missileLevel < 2)
@@ -199,11 +286,49 @@ public class VicViper : MonoBehaviour
         }
     }
 
+    void PowerUpOption()
+    {
+        optionLevel++;
+
+        for(int i = 0; i < options.Length; i++)
+        {
+            if(options[i].gameObject.activeSelf == false)
+            {
+                SetOptionActive(i, true);
+                return;
+            }
+        }
+    }
+
+    private void SetOptionActive(bool isActive)
+    {
+        for (int i = 0; i < options.Length; i++)
+        {
+            SetOptionActive(i, isActive);
+        }
+    }
+
+    private void SetOptionActive(int idx, bool isActive)
+    {
+        options[idx].gameObject.SetActive(isActive);
+    }
+
+
     void PowerUpBarrier()
     {
-        transform.Find("Bullet_4_1").gameObject.SetActive(true);
-        transform.Find("Bullet_4_2").gameObject.SetActive(true);
+        SetBarrierActive(true);
         powerup = 0;
+    }
+
+    private void SetBarrierActive(bool isActive)
+    {
+        transform.Find("Bullet_4_1").gameObject.SetActive(isActive);
+        transform.Find("Bullet_4_2").gameObject.SetActive(isActive);
+    }
+
+    private void SetSpeed()
+    {
+        speed = baseSpeed + speedLevel * 2;
     }
 
     void UpdateTrackList()
@@ -219,6 +344,45 @@ public class VicViper : MonoBehaviour
         }
     }
 
+    void Hurt()
+    {
+        Die();
+    }
+
+    void Die()
+    {
+        Instantiate(dieEffectPrefab, transform.position, Quaternion.identity);
+        life--;
+
+        if(life > 0)
+        {
+            // Revive
+            Spawn();
+        }
+        else
+        {
+            // Game Over
+        }
+    }
+
+    void Spawn()
+    {
+        powerup = 0;
+        speedLevel = 0;
+        missileLevel = 0;
+        optionLevel = 0;
+
+        SetSpeed();
+
+        primaryWeapon = PrimaryWeaponType.Normal;
+        SetBarrierActive(false);
+        SetOptionActive(false);
+        transform.position = spawnTrans.position;
+        isJustSpawned = true;
+        lastSpawnTime = Time.time;
+        col.enabled = false;
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log("碰到了" + collision.gameObject.name);
@@ -226,7 +390,16 @@ public class VicViper : MonoBehaviour
         if(collision.tag == "PowerUp")
         {
             powerup++;
+            if(powerup > 6)
+            {
+                powerup = 1;
+            }
             Destroy(collision.gameObject);
+        }
+
+        if(collision.tag == "Stage" || collision.tag == "Enemy" || collision.tag == "EnemyBullet")
+        {
+            Hurt();
         }
     }
 
