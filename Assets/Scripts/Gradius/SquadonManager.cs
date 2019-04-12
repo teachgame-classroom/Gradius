@@ -8,6 +8,10 @@ public class SquadonManager : MonoBehaviour
     public int memberCount = 5;     // 小队的敌人数量
     public float moveSpeed = 10;    // 小队的移动速度
 
+    public int enemyPrefabIndex = 0;
+
+    public int activeOffset = 1;
+
     private Transform[] waypoints;  // 移动路线的路径点
 
     private GameObject powerupPrefab;   // 小队全灭后掉落的物品Prefab
@@ -36,11 +40,11 @@ public class SquadonManager : MonoBehaviour
         for(int i = 0; i < memberCount; i++)
         {
             // 小队成员的生成位置从左到右一字排开
-            members[i] = Instantiate(enemyPrefabs[0], transform.position + Vector3.right * i, Quaternion.identity);
+            members[i] = Instantiate(enemyPrefabs[enemyPrefabIndex], transform.position + Vector3.right * i, Quaternion.identity);
 
             // 将本小队设定为小队每个成员的“所属小队”
             // 小队成员被消灭时，会通过这个变量调用自己所属小队的OnMemberDestroy方法，通知所属小队，自己已经被消灭
-            members[i].GetComponent<Enemy>().squadonManager = this;
+            members[i].GetComponentInChildren<Enemy>().squadonManager = this;
 
             members[i].SetActive(false);
         }
@@ -56,7 +60,7 @@ public class SquadonManager : MonoBehaviour
         player = GameObject.Find("Vic Viper");
 
         // 激活小队成员的摄像机距离 = 摄像机宽度的一半 + 一个单位
-        activeDistance = Camera.main.orthographicSize * Camera.main.aspect + 1;
+        activeDistance = Camera.main.orthographicSize * Camera.main.aspect + activeOffset;
     }
 
     // Update is called once per frame
@@ -157,7 +161,7 @@ public class SquadonManager : MonoBehaviour
         for (int i = 0; i < waypoints.Length; i++)
         {
             Gizmos.color = Color.cyan;
-            Gizmos.DrawCube(waypoints[i].position, Vector3.one * 0.1f);
+            Gizmos.DrawWireCube(waypoints[i].position, Vector3.right * 51 + Vector3.up * 27);
 
             if (i < waypoints.Length - 1)
             {
