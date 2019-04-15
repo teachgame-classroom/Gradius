@@ -6,6 +6,7 @@ public enum MovePattern { Straight, ZigZag, Sine, Static }
 
 public enum MoveDirection { Left, Right, Up, Down }
 
+public enum BulletMovePattern { AimAtPlayer, Horizontal, Vertical }
 
 public class Enemy : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class Enemy : MonoBehaviour
     public float straightMoveDistance = 0;
 
     private float straightMoveTotalDistance = 0;
+
+    public BulletMovePattern bulletMovePattern = BulletMovePattern.AimAtPlayer;
 
     public float speed = 10;
     public float changeDirectionPeriod = 1f;
@@ -28,6 +31,7 @@ public class Enemy : MonoBehaviour
     private float lastChangeDirectionTime = 0;
 
     public int hp = 1;
+    public bool invincible = false;
     private GameObject explosionPrefab;
 
     public SquadonManager squadonManager;   // 此敌人的所属小队，敌人生成的时候由所属小队脚本指定
@@ -37,6 +41,8 @@ public class Enemy : MonoBehaviour
 
     private GameObject player;
 
+    public float turretMinAngle = 0;
+    public float turretMaxAngle = 180;
     public Sprite[] turrentSprites;
     private SpriteRenderer spriteRenderer;
     private Transform shotPos;
@@ -78,13 +84,16 @@ public class Enemy : MonoBehaviour
         // 激活敌人的摄像机距离 = 摄像机宽度的一半 + 一个单位
         activeDistance = Camera.main.orthographicSize * Camera.main.aspect + 1;
 
-        if (waitForPlayer)
+        if(squadonManager == null)
         {
-            SetEnemyActive(false);
-        }
-        else
-        {
-            SetEnemyActive(true);
+            if (waitForPlayer)
+            {
+                SetEnemyActive(false);
+            }
+            else
+            {
+                SetEnemyActive(true);
+            }
         }
     }
 
@@ -94,9 +103,12 @@ public class Enemy : MonoBehaviour
         // 敌人还没激活时，检查摄像机距离，判断玩家是否已经接近，如果已经足够接近，就激活敌人
         if(!activated)
         {
-            if(IsPlayerCloseEnough())
+            if(squadonManager == null)
             {
-                SetEnemyActive(true);
+                if (IsPlayerCloseEnough())
+                {
+                    SetEnemyActive(true);
+                }
             }
         }
         else
@@ -140,7 +152,11 @@ public class Enemy : MonoBehaviour
 
     private void SetEnemyActive(bool isActive)
     {
-        spriteRenderer.enabled = isActive;
+        if(spriteRenderer != null)
+        {
+            spriteRenderer.enabled = isActive;
+        }
+
         col.enabled = isActive;
         activated = isActive;
     }
@@ -223,23 +239,61 @@ public class Enemy : MonoBehaviour
 
     Vector3 GetAimDirection(Vector3 targetPosition)
     {
-        Vector3 aimDirection = (targetPosition - shotPos.position).normalized;
+        Vector3 aimDirection = Vector3.left;
+
+        switch(bulletMovePattern)
+        {
+            case BulletMovePattern.Horizontal:
+                aimDirection = Vector3.left;
+                break;
+            case BulletMovePattern.Vertical:
+                aimDirection = Vector3.up;
+                break;
+            case BulletMovePattern.AimAtPlayer:
+                aimDirection = (targetPosition - shotPos.position).normalized;
+                break;
+            default:
+                aimDirection = Vector3.left;
+                break;
+        }
+
         return aimDirection;
     }
 
     void SetSpriteByAimDirection(Vector3 aimDirection)
     {
-        float angle = Vector3.Angle(Vector3.right, aimDirection) + 7.5f;
+        if (turrentSprites.Length == 0) return;
 
-        int spriteIdx = Mathf.FloorToInt(angle / 15);
-        //Debug.Log("Aim Angle:" + angle + ", idx:" + spriteIdx);
+        float angleStep = (turretMaxAngle - turretMinAngle) / (turrentSprites.Length - 1);
 
-        spriteRenderer.sprite = turrentSprites[spriteIdx];
+        float angle = Vector3.SignedAngle(Vector3.right, aimDirection, Vector3.forward) + angleStep / 2;
 
+        angle = Mathf.Clamp(angle, turretMinAngle, turretMaxAngle);
+
+        int spriteIdx = Mathf.Abs(Mathf.FloorToInt(angle / angleStep)) - 1;
+
+        spriteIdx = Mathf.Clamp(spriteIdx, 0, turrentSprites.Length - 1);
+
+        //Debug.Log("Step:" + angleStep + ", Aim Angle:" + angle + ", idx:" + spriteIdx);
+
+        if(spriteRenderer != null)
+        {
+            spriteRenderer.sprite = turrentSprites[spriteIdx];
+        }
     }
 
     public void Shoot()
     {
+        Vector3 aimDirection = GetAimDirection(player.transform.position);
+        float angle = Vector3.SignedAngle(Vector3.right, aimDirection,Vector3.forward);
+        bool playerNotInTurretAngle = (angle < turretMinAngle || angle > turretMaxAngle);
+
+        // 如果玩家不在炮塔型敌人的射程角度内，不执行射击
+        if (bulletMovePattern == BulletMovePattern.AimAtPlayer && playerNotInTurretAngle)
+        {
+            return;
+        }
+
         if(Time.time - lastFireTime > fireInterval)
         {
             GameObject bulletInstance = Instantiate(bulletPrefab, shotPos.position, Quaternion.identity);
@@ -251,11 +305,14 @@ public class Enemy : MonoBehaviour
 
     public void Hurt(int damage)
     {
-        hp -= damage;
-
-        if(hp <= 0)
+        if(!invincible)
         {
-            Die();
+            hp -= damage;
+
+            if (hp <= 0)
+            {
+                Die();
+            }
         }
     }
 

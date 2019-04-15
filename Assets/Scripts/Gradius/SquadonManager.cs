@@ -46,6 +46,13 @@ public class SquadonManager : MonoBehaviour
             // 小队成员被消灭时，会通过这个变量调用自己所属小队的OnMemberDestroy方法，通知所属小队，自己已经被消灭
             members[i].GetComponentInChildren<Enemy>().squadonManager = this;
 
+            // 未激活前不可见
+            SpriteRenderer sr = members[i].GetComponent<SpriteRenderer>();
+            if(sr)
+            {
+                sr.enabled = false;
+            }
+
             members[i].SetActive(false);
         }
 
@@ -99,6 +106,7 @@ public class SquadonManager : MonoBehaviour
         for(int i = 0; i < members.Length; i++)
         {
             members[i].SetActive(true);
+            members[i].transform.position = transform.position + Vector3.right * i;
         }
 
         isMemberActivated = true;
@@ -119,6 +127,17 @@ public class SquadonManager : MonoBehaviour
         // 如果这一帧已经到达目标路径点
         if (newPos == waypoints[waypointIdx].position)
         {
+            // 到达初始路径点时，打开SpriteRenderer，使对象可见
+            if(waypointIdx == 0)
+            {
+                SpriteRenderer sr = members[memberIdx].GetComponent<SpriteRenderer>();
+                if (sr)
+                {
+                    //Debug.Log("Enable Sprite");
+                    sr.enabled = true;
+                }
+            }
+
             // 如果已经到达最后一个路径点，路径点编号不再变化，停留在终点位置
             if (waypointIdx == waypoints.Length - 1)
             {
