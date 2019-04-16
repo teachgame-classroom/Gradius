@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BulletDamage : MonoBehaviour
 {
+    public int damage = 10;
     public bool isBarrier;
     public bool isLaser;
     public int laserCount;
@@ -29,7 +30,7 @@ public class BulletDamage : MonoBehaviour
         if(enemy != null)
         {
             // 打中的是敌人
-            enemy.Hurt(10);
+            enemy.Hurt(damage);
 
             if(isLaser == false)
             {

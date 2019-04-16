@@ -23,6 +23,7 @@ public class SquadonManager : MonoBehaviour
     private GameObject player;        // 存放玩家
     private bool isMemberActivated;   // 小队成员是否已经被激活
 
+    public bool activeByTrigger;
     private float activeDistance;   // 激活小队成员的摄像机距离
 
     // Start is called before the first frame update
@@ -75,9 +76,12 @@ public class SquadonManager : MonoBehaviour
     {
         if(!isMemberActivated)
         {
-            if(IsPlayerCloseEnough())
+            if(!activeByTrigger)
             {
-                ActivateMembers();
+                if (IsPlayerCloseEnough())
+                {
+                    ActivateMembers();
+                }
             }
         }
         else
@@ -162,6 +166,20 @@ public class SquadonManager : MonoBehaviour
         {
             Instantiate(powerupPrefab, diePosition, Quaternion.identity);
             Destroy(gameObject);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(activeByTrigger)
+        {
+            if (collision.tag == "Player")
+            {
+                if (!isMemberActivated)
+                {
+                    ActivateMembers();
+                }
+            }
         }
     }
 

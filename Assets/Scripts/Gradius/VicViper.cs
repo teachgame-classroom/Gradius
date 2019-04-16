@@ -16,7 +16,8 @@ public class VicViper : MonoBehaviour
     private float speed;
     public PrimaryWeaponType primaryWeapon;
 
-    private bool isJustSpawned = true;
+    private bool isAutoPilot = true;
+    private bool invicible = false;
     private float lastSpawnTime = 0;
     private float lastBlinkTime = 0;
     private int speedLevel = 0;
@@ -72,14 +73,15 @@ public class VicViper : MonoBehaviour
         }
         else
         {
-            if(col.enabled == false)
+            if(invicible)
             {
                 spriteRenderer.enabled = true;
-                col.enabled = true;
+                invicible = false;
+                //col.enabled = true;
             }
         }
 
-        if(isJustSpawned)
+        if(isAutoPilot)
         {
             if(Time.time - lastSpawnTime > 1)
             {
@@ -89,7 +91,7 @@ public class VicViper : MonoBehaviour
                 float distanceToExitSpawnState = Camera.main.orthographicSize * Camera.main.aspect * 0.75f;
                 if (distanceToCamera < distanceToExitSpawnState)
                 {
-                    isJustSpawned = false;
+                    isAutoPilot = false;
                 }
             }
         }
@@ -378,9 +380,10 @@ public class VicViper : MonoBehaviour
         SetBarrierActive(false);
         SetOptionActive(false);
         transform.position = spawnTrans.position;
-        isJustSpawned = true;
+        isAutoPilot = true;
+        invicible = true;
         lastSpawnTime = Time.time;
-        col.enabled = false;
+        //col.enabled = false;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -397,9 +400,12 @@ public class VicViper : MonoBehaviour
             Destroy(collision.gameObject);
         }
 
-        if(collision.tag == "Stage" || collision.tag == "Enemy" || collision.tag == "EnemyBullet")
+        if(!invicible)
         {
-            Hurt();
+            if (collision.tag == "Stage" || collision.tag == "Enemy" || collision.tag == "EnemyBullet")
+            {
+                Hurt();
+            }
         }
     }
 

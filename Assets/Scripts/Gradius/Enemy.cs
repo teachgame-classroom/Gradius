@@ -32,6 +32,13 @@ public class Enemy : MonoBehaviour
 
     public int hp = 1;
     public bool invincible = false;
+    public float invincibleTime;
+    private float spawnTime;
+
+    public bool playDamageEffect;
+
+    public string explosionPrefabName = "Prefabs/Effects/Explosion_Red";
+    public bool explosionAttachToParent;
     private GameObject explosionPrefab;
 
     public SquadonManager squadonManager;   // 此敌人的所属小队，敌人生成的时候由所属小队脚本指定
@@ -66,7 +73,7 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         powerupPrefab = Resources.Load<GameObject>("Prefabs/PowerUp");
-        explosionPrefab = Resources.Load<GameObject>("Prefabs/Effects/Explosion_Red");
+        explosionPrefab = Resources.Load<GameObject>(explosionPrefabName);
 
         player = GameObject.Find("Vic Viper");
 
@@ -113,6 +120,11 @@ public class Enemy : MonoBehaviour
         }
         else
         {
+            if(Time.time - spawnTime > invincibleTime)
+            {
+                invincible = false;
+            }
+
             if (squadonManager == null)
             {
                 // 在没有所属小队的情况下，每个敌人自行移动
@@ -154,11 +166,19 @@ public class Enemy : MonoBehaviour
     {
         if(spriteRenderer != null)
         {
-            spriteRenderer.enabled = isActive;
+            if(!playDamageEffect)
+            {
+                spriteRenderer.enabled = isActive;
+            }
         }
 
         col.enabled = isActive;
         activated = isActive;
+
+        if(activated)
+        {
+            spawnTime = Time.time;
+        }
     }
 
     // 检查摄像机与生成点的距离，如果小于激活距离，返回true，否则返回false
@@ -313,7 +333,20 @@ public class Enemy : MonoBehaviour
             {
                 Die();
             }
+            else
+            {
+                if(playDamageEffect)
+                {
+                    spriteRenderer.enabled = true;
+                    Invoke("TurnOffSprite", 0.1f);
+                }
+            }
         }
+    }
+
+    public void TurnOffSprite()
+    {
+        spriteRenderer.enabled = false;
     }
 
     public void Die()
@@ -323,7 +356,25 @@ public class Enemy : MonoBehaviour
             squadonManager.OnMemberDestroy(transform.position);
         }
 
-        Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+        GameObject explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+
+        if (explosionAttachToParent)
+        {
+            explosion.transform.SetParent(transform.parent);
+            LoopExplosion loopExplosion = explosion.GetComponent<LoopExplosion>();
+
+            if(loopExplosion)
+            {
+                float xMax = col.bounds.center.x + col.bounds.extents.x - transform.position.x;
+                float xMin = col.bounds.center.x - col.bounds.extents.x - transform.position.x;
+                float yMax = col.bounds.center.y + col.bounds.extents.y - transform.position.y;
+                float yMin = col.bounds.center.y - col.bounds.extents.y - transform.position.y;
+
+                loopExplosion.explosionAreaMin = Vector2.right * xMin + Vector2.up * yMin;
+                loopExplosion.explosionAreaMax = Vector2.right * xMax + Vector2.up * yMax;
+            }
+        }
+
 
         if(dropPowerUp)
         {
