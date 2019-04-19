@@ -384,6 +384,11 @@ public class Enemy : MonoBehaviour
         Destroy(gameObject);
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Debug.Log("hit:" + gameObject.name);
+    }
+
     private void OnDrawGizmos()
     {
         if(!activated)

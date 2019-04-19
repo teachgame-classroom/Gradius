@@ -40,7 +40,7 @@ public class CameraMove : MonoBehaviour
         {
             CameraState currentState = cameraStates[currentStateIdx];
 
-            Debug.Log(currentStateIdx + ":" + currentState.triggerType);
+            //Debug.Log(currentStateIdx + ":" + currentState.triggerType);
 
             if (currentState.triggerType == CameraState.TriggerType.Object)
             {
@@ -101,8 +101,11 @@ public class CameraMove : MonoBehaviour
             }
             else
             {
-                Vector3 screenPos = Camera.main.WorldToScreenPoint(state.triggerObject.transform.position);
-                GUI.Label(new Rect(screenPos.x - 40, screenPos.y + 20, 160, 32), "CamState:" + i);
+                if(state.triggerObject)
+                {
+                    Vector3 screenPos = Camera.main.WorldToScreenPoint(state.triggerObject.transform.position);
+                    GUI.Label(new Rect(screenPos.x - 40, screenPos.y + 20, 160, 32), "CamState:" + i);
+                }
             }
         }
     }

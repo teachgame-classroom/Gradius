@@ -25,4 +25,14 @@ public class DetectCollision : MonoBehaviour
     {
         Debug.Log(gameObject.name + "和" + other.gameObject.name + "发生了触发碰撞");
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log(gameObject.name + "和" + collision.gameObject.name + "发生了实体碰撞");
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Debug.Log(gameObject.name + "和" + collision.gameObject.name + "发生了触发碰撞");
+    }
 }

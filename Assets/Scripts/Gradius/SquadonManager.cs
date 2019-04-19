@@ -198,7 +198,7 @@ public class SquadonManager : MonoBehaviour
         for (int i = 0; i < waypoints.Length; i++)
         {
             Gizmos.color = Color.cyan;
-            Gizmos.DrawWireCube(waypoints[i].position, Vector3.right * 51 + Vector3.up * 27);
+            //Gizmos.DrawWireCube(waypoints[i].position, Vector3.right * 51 + Vector3.up * 27);
 
             if (i < waypoints.Length - 1)
             {

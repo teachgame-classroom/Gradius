@@ -20,6 +20,9 @@ public class VicViper : MonoBehaviour
     private bool invicible = false;
     private float lastSpawnTime = 0;
     private float lastBlinkTime = 0;
+    private float lastMissileTime = 0;
+    private float missileInterval = 5f;
+
     private int speedLevel = 0;
     private int missileLevel = 0;
     private int optionLevel = 0;
@@ -170,15 +173,17 @@ public class VicViper : MonoBehaviour
 
         if(missileLevel > 0)
         {
-            ShootMissile(shotPosTrans);
-
-            for (int i = 0; i < optionLevel; i++)
+            if (Time.time - lastMissileTime > missileInterval)
             {
-                ShootMissile(options[i]);
-            }
+                ShootMissile(shotPosTrans);
 
-            //ShootMissile(options[0]);
-            //ShootMissile(options[1]);
+                for (int i = 0; i < optionLevel; i++)
+                {
+                    ShootMissile(options[i]);
+                }
+
+                lastMissileTime = Time.time;
+            }
         }
     }
 
@@ -263,9 +268,9 @@ public class VicViper : MonoBehaviour
     {
         GameObject missileInstance = Instantiate(bullets[MISSILE], firePos.position, Quaternion.Euler(0, 0, -45));
 
-        if(missileLevel == 2)
+        if (missileLevel == 2)
         {
-            Instantiate(bullets[MISSILE], firePos.position + missileInstance.transform.right * 0.75f , Quaternion.Euler(0, 0, -45));
+            Instantiate(bullets[MISSILE], firePos.position + missileInstance.transform.right * 0.75f, Quaternion.Euler(0, 0, -45));
         }
     }
 
@@ -290,6 +295,7 @@ public class VicViper : MonoBehaviour
 
     void PowerUpOption()
     {
+        powerup = 0;
         optionLevel++;
 
         for(int i = 0; i < options.Length; i++)

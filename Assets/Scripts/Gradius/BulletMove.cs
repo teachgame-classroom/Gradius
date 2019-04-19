@@ -50,14 +50,19 @@ public class BulletMove : MonoBehaviour
         {
             //Debug.DrawLine(transform.position, hit.point, Color.red, 1f);
 
-            Debug.DrawLine(hit.point, hit.point + hit.normal, Color.red, 1f);
+            //Debug.DrawLine(hit.point, hit.point + hit.normal, Color.red, 1f);
 
-            Debug.Log("导弹正接近：" + hit.transform.name);
+            //Debug.Log("导弹正接近：" + hit.transform.name);
             return hit.normal;
         }
         else
         {
             return Vector3.zero;
         }
+    }
+
+    private void OnBecameInvisible()
+    {
+        Destroy(gameObject);
     }
 }
