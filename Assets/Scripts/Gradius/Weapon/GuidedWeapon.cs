@@ -12,7 +12,7 @@ public class GuidedWeapon : Weapon
         get { return 0.2f; }
     }
 
-    public GuidedWeapon(Transform[] shotPosTrans, string targetTag) : base(0, shotPosTrans)
+    public GuidedWeapon(Transform[] shotPosTrans, string targetTag, bool isPlayerWeapon) : base(0, shotPosTrans, isPlayerWeapon)
     {
         this.targetTag = targetTag;
     }

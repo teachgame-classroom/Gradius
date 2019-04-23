@@ -15,4 +15,21 @@ public class EnemyBase : Character
     {
         base.Update();
     }
+
+    protected override void InitCharacter()
+    {
+        base.InitCharacter();
+        if(hurtTags.Length == 0)
+        {
+            hurtTags = new string[] { "PlayerBullet" };
+        }
+
+        LoadDamageEffect();
+    }
+
+    protected virtual void LoadDamageEffect()
+    {
+        dieEffect = Resources.Load<GameObject>("Prefabs/Effects/Explosion_Red");
+
+    }
 }

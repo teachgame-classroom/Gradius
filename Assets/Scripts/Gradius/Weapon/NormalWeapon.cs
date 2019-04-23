@@ -9,7 +9,7 @@ public class NormalWeapon : Weapon
         get { return 0.15f; }
     }
 
-    public NormalWeapon(Transform[] shotPosTrans) : base(0, shotPosTrans)
+    public NormalWeapon(Transform[] shotPosTrans, bool isPlayerWeapon) : base(0, shotPosTrans, isPlayerWeapon)
     {
 
     }

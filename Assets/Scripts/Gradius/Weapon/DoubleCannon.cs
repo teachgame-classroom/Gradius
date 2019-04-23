@@ -9,7 +9,7 @@ public class DoubleCannon : Weapon
         get { return 0.2f; }
     }
 
-    public DoubleCannon(Transform[] shotPosTrans) : base(0, shotPosTrans)
+    public DoubleCannon(Transform[] shotPosTrans, bool isPlayerWeapon) : base(0, shotPosTrans, isPlayerWeapon)
     {
 
     }

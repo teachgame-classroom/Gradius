@@ -15,8 +15,8 @@ GameObject:
   - component: {fileID: 7833309252948103124}
   - component: {fileID: 8583849659804921411}
   m_Layer: 0
-  m_Name: Bullet_3
-  m_TagString: Untagged
+  m_Name: Bullet_2
+  m_TagString: PlayerBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -118,6 +118,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   isMissile: 1
+  isBarrier: 0
   moveDirection: {x: 0, y: 0, z: 0}
 --- !u!114 &7833309252948103124
 MonoBehaviour:
@@ -131,6 +132,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71935310d502b214988928e9f641b1b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 10
+  isBarrier: 0
   isLaser: 0
   laserCount: 0
 --- !u!61 &8583849659804921411

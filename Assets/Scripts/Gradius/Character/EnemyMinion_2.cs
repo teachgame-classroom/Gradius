@@ -20,10 +20,6 @@ public class EnemyMinion_2 : EnemyBase
         base.Update();
     }
 
-    protected override void InitCharacter()
-    {
-    }
-
     protected override void Move()
     {
         Vector3 velocity_v = Vector3.up * Mathf.Sin(Mathf.PI * 2 * Time.time / period) * sineAmp;

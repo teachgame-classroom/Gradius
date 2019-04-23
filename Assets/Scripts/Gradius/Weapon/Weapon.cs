@@ -4,6 +4,8 @@ using UnityEngine;
 
 public abstract class Weapon
 {
+    public bool isPlayerWeapon;
+
     protected int optionLevel;
 
     protected abstract float fireInterval { get; }
@@ -12,17 +14,19 @@ public abstract class Weapon
     protected GameObject bulletPrefab;
     protected Transform[] shotPosTrans;
 
-    public Weapon(int bulletPrefabIndex, Transform[] shotPosTrans)
+    public Weapon(int bulletPrefabIndex, Transform[] shotPosTrans, bool isPlayerWeapon)
     {
         string bulletPrefabName = "Prefabs/Bullets/Bullet_" + bulletPrefabIndex;
         bulletPrefab = Resources.Load<GameObject>(bulletPrefabName);
         this.shotPosTrans = shotPosTrans;
+        this.isPlayerWeapon = isPlayerWeapon;
     }
 
-    public Weapon(string bulletPrefabName, Transform[] shotPosTrans)
+    public Weapon(string bulletPrefabName, Transform[] shotPosTrans, bool isPlayerWeapon)
     {
         bulletPrefab = Resources.Load<GameObject>("Prefabs/Bullets/" + bulletPrefabName);
         this.shotPosTrans = shotPosTrans;
+        this.isPlayerWeapon = isPlayerWeapon;
     }
 
     public void TryShoot()
@@ -64,7 +68,18 @@ public abstract class Weapon
 
     protected virtual void Shoot(Transform shotPos)
     {
-        GameObject.Instantiate(bulletPrefab, shotPos.position, shotPos.rotation);
+        //GameObject.Instantiate(bulletPrefab, shotPos.position, shotPos.rotation);
+        GameObject instance = GameObject.Instantiate(bulletPrefab, shotPos.position, shotPos.rotation);
+        
+        //instance.tag = isPlayerWeapon ? "PlayerBullet" : "EnemyBullet";
+        if(isPlayerWeapon)
+        {
+            instance.tag = "PlayerBullet";
+        }
+        else
+        {
+            instance.tag = "EnemyBullet";
+        }
     }
 
     public void PowerOption()

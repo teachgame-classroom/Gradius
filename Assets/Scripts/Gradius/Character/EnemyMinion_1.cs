@@ -21,10 +21,6 @@ public class EnemyMinion_1 : EnemyBase
         base.Update();
     }
 
-    protected override void InitCharacter()
-    {
-    }
-
     protected override void Move()
     {
         if (Time.time - lastChangeDirectionTime > changeDirectionPeriod)

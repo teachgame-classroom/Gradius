@@ -79,11 +79,11 @@ public class VicViper : MonoBehaviour
     private void InitWeapon()
     {
         //weapons[0] = new GuidedWeapon(shotPosTrans, "Enemy");
-        weapons[0] = new NormalWeapon(shotPosTrans);
-        weapons[1] = new DoubleCannon(shotPosTrans);
-        weapons[2] = new Laser(shotPosTrans);
+        weapons[0] = new NormalWeapon(shotPosTrans, true);
+        weapons[1] = new DoubleCannon(shotPosTrans, true);
+        weapons[2] = new Laser(shotPosTrans, true);
 
-        missile = new Missile(shotPosTrans);
+        missile = new Missile(shotPosTrans, true);
 
         currentWeaponIdx = 0;
 

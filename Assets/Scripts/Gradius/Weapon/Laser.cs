@@ -9,7 +9,7 @@ public class Laser : Weapon
         get { return 0.5f; }
     }
 
-    public Laser(Transform[] shotPosTrans) : base(1, shotPosTrans)
+    public Laser(Transform[] shotPosTrans, bool isPlayerWeapon) : base(1, shotPosTrans, isPlayerWeapon)
     {
 
     }

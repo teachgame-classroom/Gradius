@@ -8,45 +8,23 @@ public class BulletDamage : MonoBehaviour
     public bool isBarrier;
     public bool isLaser;
     public int laserCount;
-
-    // Start is called before the first frame update
-    void Start()
+    
+    public void OnHit()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        Debug.Log("子弹打中了" + collision.gameObject.name);
-
-        Enemy enemy = collision.GetComponent<Enemy>();
-
-        if(enemy != null)
+        if (isLaser == false)
         {
-            // 打中的是敌人
-            enemy.Hurt(damage);
-
-            if(isLaser == false)
+            if (isBarrier == false)
             {
-                if(isBarrier == false)
-                {
-                    Destroy(gameObject);
-                }
+                Destroy(gameObject);
             }
-            else
-            {
-                laserCount--;
+        }
+        else
+        {
+            laserCount--;
 
-                if(laserCount == 0)
-                {
-                    Destroy(gameObject);
-                }
+            if (laserCount == 0)
+            {
+                Destroy(gameObject);
             }
         }
     }

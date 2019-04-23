@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class Missile : Weapon
 {
-    protected int level = 0;
+    public int level { get; protected set; }
 
     protected override float fireInterval
     {
         get { return 2f; }
     }
 
-    public Missile(Transform[] shotPosTrans) : base(2, shotPosTrans)
+    public Missile(Transform[] shotPosTrans, bool isPlayerWeapon) : base(2, shotPosTrans, isPlayerWeapon)
     {
         this.level = 0;
     }
