@@ -14,19 +14,27 @@ public abstract class Weapon
     protected GameObject bulletPrefab;
     protected Transform[] shotPosTrans;
 
+    protected ObjectPool bulletPool;
+
     public Weapon(int bulletPrefabIndex, Transform[] shotPosTrans, bool isPlayerWeapon)
     {
-        string bulletPrefabName = "Prefabs/Bullets/Bullet_" + bulletPrefabIndex;
-        bulletPrefab = Resources.Load<GameObject>(bulletPrefabName);
-        this.shotPosTrans = shotPosTrans;
-        this.isPlayerWeapon = isPlayerWeapon;
+        string bulletPrefabPath = "Prefabs/Bullets/Bullet_" + bulletPrefabIndex;
+        Init(shotPosTrans, isPlayerWeapon, bulletPrefabPath);
     }
 
     public Weapon(string bulletPrefabName, Transform[] shotPosTrans, bool isPlayerWeapon)
     {
-        bulletPrefab = Resources.Load<GameObject>("Prefabs/Bullets/" + bulletPrefabName);
+        string bulletPrefabPath = "Prefabs/Bullets/" + bulletPrefabName;
+        Init(shotPosTrans, isPlayerWeapon, bulletPrefabPath);
+    }
+
+    private void Init(Transform[] shotPosTrans, bool isPlayerWeapon, string bulletPrefabName)
+    {
+        bulletPrefab = Resources.Load<GameObject>(bulletPrefabName);
         this.shotPosTrans = shotPosTrans;
         this.isPlayerWeapon = isPlayerWeapon;
+
+        bulletPool = new ObjectPool(bulletPrefab, 30);
     }
 
     public void TryShoot()
@@ -69,8 +77,10 @@ public abstract class Weapon
     protected virtual void Shoot(Transform shotPos)
     {
         //GameObject.Instantiate(bulletPrefab, shotPos.position, shotPos.rotation);
-        GameObject instance = GameObject.Instantiate(bulletPrefab, shotPos.position, shotPos.rotation);
-        
+        //GameObject instance = GameObject.Instantiate(bulletPrefab, shotPos.position, shotPos.rotation);
+
+        GameObject instance = bulletPool.Get(shotPos.position, shotPos.rotation);
+
         //instance.tag = isPlayerWeapon ? "PlayerBullet" : "EnemyBullet";
         if(isPlayerWeapon)
         {

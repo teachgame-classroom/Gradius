@@ -63,6 +63,7 @@ public class BulletMove : MonoBehaviour
 
     private void OnBecameInvisible()
     {
-        Destroy(gameObject);
+        gameObject.SetActive(false);
+        //Destroy(gameObject);
     }
 }

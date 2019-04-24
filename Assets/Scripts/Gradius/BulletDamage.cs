@@ -15,7 +15,8 @@ public class BulletDamage : MonoBehaviour
         {
             if (isBarrier == false)
             {
-                Destroy(gameObject);
+                gameObject.SetActive(false);
+                //Destroy(gameObject);
             }
         }
         else
@@ -24,7 +25,8 @@ public class BulletDamage : MonoBehaviour
 
             if (laserCount == 0)
             {
-                Destroy(gameObject);
+                gameObject.SetActive(false);
+                //Destroy(gameObject);
             }
         }
     }

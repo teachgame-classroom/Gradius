@@ -17,6 +17,9 @@ public class DoubleCannon : Weapon
     protected override void Shoot(Transform shotPos)
     {
         base.Shoot(shotPos);
-        GameObject.Instantiate(bulletPrefab, shotPos.position, Quaternion.Euler(0, 0, 45));        
+
+        GameObject extraBullet = bulletPool.Get(shotPos.position, Quaternion.Euler(0, 0, 45));
+        extraBullet.GetComponent<BulletMove>().moveDirection = extraBullet.transform.right;
+        //GameObject.Instantiate(bulletPrefab, shotPos.position, Quaternion.Euler(0, 0, 45));        
     }
 }

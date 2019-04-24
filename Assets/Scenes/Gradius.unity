@@ -17706,6 +17706,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 2916910805819378481, guid: 70064965f609b2c4a8ce44ef15fb9e64,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7062479569366847509, guid: 70064965f609b2c4a8ce44ef15fb9e64,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -17769,6 +17774,11 @@ PrefabInstance:
     - target: {fileID: 3159544843290905143, guid: 70064965f609b2c4a8ce44ef15fb9e64,
         type: 3}
       propertyPath: maxHp
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3159544843290905143, guid: 70064965f609b2c4a8ce44ef15fb9e64,
+        type: 3}
+      propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7843980966814176525, guid: 70064965f609b2c4a8ce44ef15fb9e64,
