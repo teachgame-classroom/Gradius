@@ -45,7 +45,7 @@ public class SquadonManager : MonoBehaviour
 
             // 将本小队设定为小队每个成员的“所属小队”
             // 小队成员被消灭时，会通过这个变量调用自己所属小队的OnMemberDestroy方法，通知所属小队，自己已经被消灭
-            members[i].GetComponentInChildren<Enemy>().squadonManager = this;
+            members[i].GetComponentInChildren<EnemyBase>().squadonManager = this;
 
             // 未激活前不可见
             SpriteRenderer sr = members[i].GetComponent<SpriteRenderer>();
@@ -65,7 +65,7 @@ public class SquadonManager : MonoBehaviour
             waypoints[i] = transform.GetChild(i);
         }
 
-        player = GameObject.Find("Vic Viper");
+        player = GameObject.Find("Player");
 
         // 激活小队成员的摄像机距离 = 摄像机宽度的一半 + 一个单位
         activeDistance = Camera.main.orthographicSize * Camera.main.aspect + activeOffset;
@@ -80,6 +80,7 @@ public class SquadonManager : MonoBehaviour
             {
                 if (IsPlayerCloseEnough())
                 {
+                    Debug.Log("Close Enough:" + gameObject.name);
                     ActivateMembers();
                 }
             }

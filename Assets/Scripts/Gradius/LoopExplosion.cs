@@ -35,4 +35,18 @@ public class LoopExplosion : MonoBehaviour
             effect.gameObject.SetActive(true);
         }
     }
+
+    public void Attach(Transform attachTo)
+    {
+        transform.SetParent(attachTo.parent);
+        Collider2D col = attachTo.GetComponent<Collider2D>();
+
+        float xMax = col.bounds.center.x + col.bounds.extents.x - transform.position.x;
+        float xMin = col.bounds.center.x - col.bounds.extents.x - transform.position.x;
+        float yMax = col.bounds.center.y + col.bounds.extents.y - transform.position.y;
+        float yMin = col.bounds.center.y - col.bounds.extents.y - transform.position.y;
+
+        explosionAreaMin = Vector2.right * xMin + Vector2.up * yMin;
+        explosionAreaMax = Vector2.right * xMax + Vector2.up * yMax;
+    }
 }

@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 555183167}
   - component: {fileID: 555183169}
-  - component: {fileID: 555183168}
   - component: {fileID: 8395688979479018594}
   - component: {fileID: 184602541}
+  - component: {fileID: 8128140159302488816}
   m_Layer: 0
   m_Name: Core
   m_TagString: Enemy
@@ -50,40 +50,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 1.7
---- !u!114 &555183168
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 555183166}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3fb07359fae0ce549b1c2cbe838190e5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  movePattern: 3
-  straightMoveDirection: 0
-  straightMoveDistance: 0
-  bulletMovePattern: 0
-  speed: 10
-  changeDirectionPeriod: 1
-  sineAmp: 1
-  trackColor: {r: 1, g: 1, b: 1, a: 1}
-  hp: 100
-  invincible: 1
-  invincibleTime: 30
-  playDamageEffect: 1
-  explosionPrefabName: Prefabs/Effects/LoopExplosion
-  explosionAttachToParent: 1
-  squadonManager: {fileID: 0}
-  turretMinAngle: 0
-  turretMaxAngle: 180
-  turrentSprites: []
-  bulletPrefab: {fileID: 0}
-  fireInterval: 0
-  waitForPlayer: 0
-  dropPowerUp: 1
 --- !u!50 &8395688979479018594
 Rigidbody2D:
   serializedVersion: 4
@@ -153,6 +119,26 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &8128140159302488816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 555183166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cdb915aa52798f4987b00bb85b4c687, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hurtTags: []
+  invincible: 0
+  maxHp: 100
+  dropPowerUp: 0
+  drawMoveTrail: 0
+  moveSpeed: 0
+  squadonManager: {fileID: 0}
+  invincibleTime: 30
 --- !u!1 &1122311165
 GameObject:
   m_ObjectHideFlags: 0
@@ -307,7 +293,6 @@ MonoBehaviour:
   invincibleTime: 0
   playDamageEffect: 0
   explosionPrefabName: Prefabs/Effects/LoopExplosion
-  explosionAttachToParent: 1
   squadonManager: {fileID: 0}
   turretMinAngle: -180
   turretMaxAngle: -45
@@ -440,6 +425,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 089776877aebcd04b8007eebd65e06a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hurtTags: []
+  invincible: 1
+  maxHp: 100
+  dropPowerUp: 0
+  drawMoveTrail: 0
+  moveSpeed: 0
+  squadonManager: {fileID: 0}
 --- !u!1 &1251734862
 GameObject:
   m_ObjectHideFlags: 0
@@ -736,7 +728,6 @@ MonoBehaviour:
   invincibleTime: 0
   playDamageEffect: 0
   explosionPrefabName: Prefabs/Effects/LoopExplosion
-  explosionAttachToParent: 1
   squadonManager: {fileID: 0}
   turretMinAngle: 45
   turretMaxAngle: 180
@@ -997,7 +988,6 @@ MonoBehaviour:
   invincibleTime: 0
   playDamageEffect: 0
   explosionPrefabName: Prefabs/Effects/LoopExplosion
-  explosionAttachToParent: 1
   squadonManager: {fileID: 0}
   turretMinAngle: 0
   turretMaxAngle: 180
@@ -1157,6 +1147,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 089776877aebcd04b8007eebd65e06a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hurtTags: []
+  invincible: 1
+  maxHp: 100
+  dropPowerUp: 0
+  drawMoveTrail: 0
+  moveSpeed: 0
+  squadonManager: {fileID: 0}
 --- !u!1 &4488693924306918399
 GameObject:
   m_ObjectHideFlags: 0
@@ -1262,7 +1259,6 @@ MonoBehaviour:
   invincibleTime: 0
   playDamageEffect: 0
   explosionPrefabName: Prefabs/Effects/LoopExplosion
-  explosionAttachToParent: 1
   squadonManager: {fileID: 0}
   turretMinAngle: 0
   turretMaxAngle: 180
@@ -1377,7 +1373,6 @@ MonoBehaviour:
   invincibleTime: 0
   playDamageEffect: 0
   explosionPrefabName: Prefabs/Effects/LoopExplosion
-  explosionAttachToParent: 1
   squadonManager: {fileID: 0}
   turretMinAngle: 0
   turretMaxAngle: 180
@@ -1506,6 +1501,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 089776877aebcd04b8007eebd65e06a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hurtTags: []
+  invincible: 1
+  maxHp: 100
+  dropPowerUp: 0
+  drawMoveTrail: 0
+  moveSpeed: 0
+  squadonManager: {fileID: 0}
 --- !u!1 &5871493656620948627
 GameObject:
   m_ObjectHideFlags: 0
@@ -1625,6 +1627,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 089776877aebcd04b8007eebd65e06a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hurtTags: []
+  invincible: 1
+  maxHp: 100
+  dropPowerUp: 0
+  drawMoveTrail: 0
+  moveSpeed: 0
+  squadonManager: {fileID: 0}
 --- !u!1 &6431474340246680046
 GameObject:
   m_ObjectHideFlags: 0
@@ -1744,6 +1753,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 089776877aebcd04b8007eebd65e06a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hurtTags: []
+  invincible: 1
+  maxHp: 100
+  dropPowerUp: 0
+  drawMoveTrail: 0
+  moveSpeed: 0
+  squadonManager: {fileID: 0}
 --- !u!1 &6728022266808857700
 GameObject:
   m_ObjectHideFlags: 0
@@ -1863,6 +1879,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 089776877aebcd04b8007eebd65e06a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hurtTags: []
+  invincible: 1
+  maxHp: 100
+  dropPowerUp: 0
+  drawMoveTrail: 0
+  moveSpeed: 0
+  squadonManager: {fileID: 0}
 --- !u!1 &7273041170097840275
 GameObject:
   m_ObjectHideFlags: 0
@@ -1968,7 +1991,6 @@ MonoBehaviour:
   invincibleTime: 0
   playDamageEffect: 0
   explosionPrefabName: Prefabs/Effects/LoopExplosion
-  explosionAttachToParent: 1
   squadonManager: {fileID: 0}
   turretMinAngle: 0
   turretMaxAngle: 180
@@ -1988,10 +2010,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1563790583852479621}
   - component: {fileID: 5113035078097598653}
-  - component: {fileID: 5386281024715189059}
   - component: {fileID: 989409727699049597}
   - component: {fileID: 651656803242446201}
   - component: {fileID: 2693910858264097730}
+  - component: {fileID: 7099080689454734747}
   m_Layer: 0
   m_Name: Body
   m_TagString: Enemy
@@ -2077,40 +2099,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &5386281024715189059
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7814002399154268554}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3fb07359fae0ce549b1c2cbe838190e5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  movePattern: 0
-  straightMoveDirection: 0
-  straightMoveDistance: 0
-  bulletMovePattern: 0
-  speed: 10
-  changeDirectionPeriod: 1
-  sineAmp: 1
-  trackColor: {r: 1, g: 1, b: 1, a: 1}
-  hp: 1
-  invincible: 1
-  invincibleTime: 0
-  playDamageEffect: 0
-  explosionPrefabName: Prefabs/Effects/Explosion_Red
-  explosionAttachToParent: 0
-  squadonManager: {fileID: 0}
-  turretMinAngle: 0
-  turretMaxAngle: 180
-  turrentSprites: []
-  bulletPrefab: {fileID: 0}
-  fireInterval: 0
-  waitForPlayer: 0
-  dropPowerUp: 1
 --- !u!60 &989409727699049597
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -2203,6 +2191,25 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &7099080689454734747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7814002399154268554}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad85da706367c9c49ab254f24ac51816, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hurtTags: []
+  invincible: 1
+  maxHp: 0
+  dropPowerUp: 0
+  drawMoveTrail: 0
+  moveSpeed: 0
+  squadonManager: {fileID: 0}
 --- !u!1 &7935825745249934378
 GameObject:
   m_ObjectHideFlags: 0
@@ -2322,6 +2329,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 089776877aebcd04b8007eebd65e06a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hurtTags: []
+  invincible: 1
+  maxHp: 100
+  dropPowerUp: 0
+  drawMoveTrail: 0
+  moveSpeed: 0
+  squadonManager: {fileID: 0}
 --- !u!61 &427796587
 BoxCollider2D:
   m_ObjectHideFlags: 0

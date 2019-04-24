@@ -38,7 +38,6 @@ public class Enemy : MonoBehaviour
     public bool playDamageEffect;
 
     public string explosionPrefabName = "Prefabs/Effects/Explosion_Red";
-    public bool explosionAttachToParent;
     private GameObject explosionPrefab;
 
     public SquadonManager squadonManager;   // 此敌人的所属小队，敌人生成的时候由所属小队脚本指定
@@ -357,24 +356,12 @@ public class Enemy : MonoBehaviour
         }
 
         GameObject explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+        LoopExplosion loopExplosion = explosion.GetComponent<LoopExplosion>();
 
-        if (explosionAttachToParent)
+        if (loopExplosion)
         {
-            explosion.transform.SetParent(transform.parent);
-            LoopExplosion loopExplosion = explosion.GetComponent<LoopExplosion>();
-
-            if(loopExplosion)
-            {
-                float xMax = col.bounds.center.x + col.bounds.extents.x - transform.position.x;
-                float xMin = col.bounds.center.x - col.bounds.extents.x - transform.position.x;
-                float yMax = col.bounds.center.y + col.bounds.extents.y - transform.position.y;
-                float yMin = col.bounds.center.y - col.bounds.extents.y - transform.position.y;
-
-                loopExplosion.explosionAreaMin = Vector2.right * xMin + Vector2.up * yMin;
-                loopExplosion.explosionAreaMax = Vector2.right * xMax + Vector2.up * yMax;
-            }
+            loopExplosion.Attach(transform);
         }
-
 
         if(dropPowerUp)
         {

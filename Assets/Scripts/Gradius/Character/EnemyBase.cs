@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EnemyBase : Character
 {
+    public SquadonManager squadonManager;
+
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -24,12 +26,19 @@ public class EnemyBase : Character
             hurtTags = new string[] { "PlayerBullet" };
         }
 
-        LoadDamageEffect();
+        LoadDieEffect();
     }
 
-    protected virtual void LoadDamageEffect()
+    protected virtual void LoadDieEffect()
     {
         dieEffect = Resources.Load<GameObject>("Prefabs/Effects/Explosion_Red");
+    }
 
+    protected override void Move()
+    {
+        if(squadonManager == null)
+        {
+            base.Move();
+        }
     }
 }

@@ -101,12 +101,27 @@ public class Character : MonoBehaviour
             {
                 Die();
             }
+            else
+            {
+                PlayHurtEffect();
+            }
         }
+    }
+
+    protected virtual void PlayHurtEffect()
+    {
+
     }
 
     protected virtual void PlayDieEffect()
     {
-        Instantiate(dieEffect, transform.position, Quaternion.identity);
+        GameObject explosion = Instantiate(dieEffect, transform.position, Quaternion.identity);
+        LoopExplosion loopExplosion = explosion.GetComponent<LoopExplosion>();
+
+        if(loopExplosion)
+        {
+            loopExplosion.Attach(transform);
+        }
     }
 
     public void TurnOffSprite()

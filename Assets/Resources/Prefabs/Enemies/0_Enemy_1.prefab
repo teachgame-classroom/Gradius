@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 4598789467469337578}
   - component: {fileID: 4598789467469337621}
   - component: {fileID: 4598789467469337620}
-  - component: {fileID: 596228532486207606}
+  - component: {fileID: 3584227522678574885}
   m_Layer: 0
-  m_Name: Enemy_1
+  m_Name: 0_Enemy_1
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -149,7 +149,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.6, y: 0.6}
   m_EdgeRadius: 0
---- !u!114 &596228532486207606
+--- !u!114 &3584227522678574885
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -158,20 +158,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 4598789467469337623}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3fb07359fae0ce549b1c2cbe838190e5, type: 3}
+  m_Script: {fileID: 11500000, guid: ad85da706367c9c49ab254f24ac51816, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movePattern: 0
-  straightMoveDirection: 0
-  straightMoveDistance: 0
-  speed: 10
-  changeDirectionPeriod: 1
-  sineAmp: 1
-  trackColor: {r: 1, g: 1, b: 1, a: 1}
-  hp: 1
-  squadonManager: {fileID: 0}
-  turrentSprites: []
-  bulletPrefab: {fileID: 0}
-  fireInterval: 0
-  waitForPlayer: 0
+  hurtTags: []
+  invincible: 0
+  maxHp: 1
   dropPowerUp: 0
+  drawMoveTrail: 0
+  moveSpeed: 1
