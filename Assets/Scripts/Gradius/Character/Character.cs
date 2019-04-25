@@ -11,6 +11,7 @@ public class Character : MonoBehaviour
 
     public bool dropPowerUp;
 
+    public bool isAlive { get { return invincible || hp > 0; } }
     protected int hp;
 
     public bool drawMoveTrail;
@@ -37,10 +38,13 @@ public class Character : MonoBehaviour
     // Update is called once per frame
     protected virtual void Update()
     {
-        Move();
-        Shoot();
+        if(isAlive)
+        {
+            Move();
+            Shoot();
+        }
 
-        if(drawMoveTrail)
+        if (drawMoveTrail)
         {
             RecordMoveTrail();
         }
@@ -129,19 +133,26 @@ public class Character : MonoBehaviour
         spriteRenderer.enabled = false;
     }
 
-    public void Die()
+    public virtual void Die()
+    {
+        DoBeforeDie();
+
+        Destroy(gameObject);
+    }
+
+    protected void DoBeforeDie()
     {
         if (dropPowerUp)
         {
             Instantiate(powerUpPrefab, transform.position, Quaternion.identity);
         }
 
-        if(dieEffect)
+        if (dieEffect)
         {
             PlayDieEffect();
         }
 
-        Destroy(gameObject);
+        GetComponentInChildren<Collider2D>().enabled = false;
     }
 
     protected void RecordMoveTrail()
@@ -168,37 +179,24 @@ public class Character : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
-        //Debug.Log("碰到了" + collision.gameObject.name);
-
-        //if (collision.tag == "PowerUp")
-        //{
-        //    powerup++;
-        //    if (powerup > 6)
-        //    {
-        //        powerup = 1;
-        //    }
-        //    Destroy(collision.gameObject);
-        //}
-
         if (!invincible)
         {
-            for(int i = 0; i < hurtTags.Length; i++)
+            for (int i = 0; i < hurtTags.Length; i++)
             {
-                if(collision.tag == hurtTags[i])
+                if (collision.tag == hurtTags[i])
                 {
                     int damage = maxHp;
                     BulletDamage bullet = collision.GetComponent<BulletDamage>();
 
-                    if(bullet)
+                    if (bullet)
                     {
                         damage = bullet.damage;
+                        bullet.OnHit();
                     }
 
                     Hurt(damage);
-
-                    bullet.OnHit();
                 }
             }
         }

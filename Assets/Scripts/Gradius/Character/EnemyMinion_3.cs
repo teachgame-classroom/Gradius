@@ -25,7 +25,7 @@ public class EnemyMinion_3 : EnemyBase
     protected override void InitWeapon()
     {
         base.InitWeapon();
-        currentWeapon = new GuidedWeapon(shotPosTrans, "Player", false);
+        currentWeapon = new GuidedWeapon(0, shotPosTrans, "Player", false);
     }
 
     void SetSpriteByAimDirection(Vector3 aimDirection)

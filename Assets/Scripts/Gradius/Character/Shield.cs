@@ -4,25 +4,22 @@ using UnityEngine;
 
 public class Shield : EnemyBossPart
 {
-    private Collider2D col;
     public float invincibleTime = 30;
 
     protected override void InitCharacter()
     {
         base.InitCharacter();
-        TurnOffSprite();
-        invincible = true;
+        //invincible = true;
         Invoke("TurnOffInvincible", invincibleTime);
     }
 
     protected override void LoadDieEffect()
     {
-        dieEffect = Resources.Load<GameObject>("Prefabs/Bullets/EnemyBullets/Bullet_12");
+        dieEffect = Resources.Load<GameObject>("Prefabs/Bullets/Bullet_12");
     }
 
     protected override void PlayDieEffect()
     {
-        col.enabled = false;
         spriteRenderer.enabled = true;
 
         GameObject bullet1 = Instantiate(dieEffect, transform.position, Quaternion.identity);

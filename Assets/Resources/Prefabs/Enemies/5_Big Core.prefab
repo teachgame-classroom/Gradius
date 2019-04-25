@@ -151,7 +151,7 @@ GameObject:
   - component: {fileID: 1122311170}
   - component: {fileID: 1122311169}
   - component: {fileID: 1122311168}
-  - component: {fileID: 1122311167}
+  - component: {fileID: 648587784427798220}
   m_Layer: 0
   m_Name: Turret (1)
   m_TagString: Enemy
@@ -169,7 +169,8 @@ Transform:
   m_LocalRotation: {x: 1, y: -0, z: -0, w: 0}
   m_LocalPosition: {x: -17.6, y: -7.93, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 5374398330786949782}
   m_Father: {fileID: 1563790583852479621}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 180, y: 0, z: 0}
@@ -268,7 +269,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.3, y: 1.36}
   m_EdgeRadius: 0
---- !u!114 &1122311167
+--- !u!114 &648587784427798220
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -277,35 +278,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1122311165}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3fb07359fae0ce549b1c2cbe838190e5, type: 3}
+  m_Script: {fileID: 11500000, guid: df11d2f3fc6fc0947817abefc87e7cc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movePattern: 3
-  straightMoveDirection: 0
-  straightMoveDistance: 0
-  bulletMovePattern: 0
-  speed: 10
-  changeDirectionPeriod: 1
-  sineAmp: 1
-  trackColor: {r: 1, g: 1, b: 1, a: 1}
-  hp: 100
-  invincible: 1
-  invincibleTime: 0
-  playDamageEffect: 0
-  explosionPrefabName: Prefabs/Effects/LoopExplosion
-  squadonManager: {fileID: 0}
-  turretMinAngle: -180
-  turretMaxAngle: -45
-  turrentSprites:
-  - {fileID: 21300156, guid: 89bdbb52b390e6d498c2d32073922631, type: 3}
-  - {fileID: 21300154, guid: 89bdbb52b390e6d498c2d32073922631, type: 3}
-  - {fileID: 21300152, guid: 89bdbb52b390e6d498c2d32073922631, type: 3}
-  - {fileID: 21300150, guid: 89bdbb52b390e6d498c2d32073922631, type: 3}
-  bulletPrefab: {fileID: 7789516539089122690, guid: d670b36201253e247a7d6236be78d5ff,
-    type: 3}
-  fireInterval: 2
-  waitForPlayer: 0
+  hurtTags: []
+  invincible: 0
+  maxHp: 100
   dropPowerUp: 1
+  drawMoveTrail: 0
+  moveSpeed: 0
+  squadonManager: {fileID: 0}
 --- !u!1 &1210849912
 GameObject:
   m_ObjectHideFlags: 0
@@ -426,12 +408,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hurtTags: []
-  invincible: 1
+  invincible: 0
   maxHp: 100
   dropPowerUp: 0
   drawMoveTrail: 0
   moveSpeed: 0
   squadonManager: {fileID: 0}
+  invincibleTime: 30
 --- !u!1 &1251734862
 GameObject:
   m_ObjectHideFlags: 0
@@ -546,8 +529,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09197f9aae2765e47ba5fe5813852034, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  openOffset: -3
-  closeOffset: -7
 --- !u!61 &3011526690930891833
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -586,7 +567,7 @@ GameObject:
   - component: {fileID: 1502002621}
   - component: {fileID: 1502002620}
   - component: {fileID: 1502002619}
-  - component: {fileID: 1502002618}
+  - component: {fileID: 2100938923932480581}
   m_Layer: 0
   m_Name: Turret
   m_TagString: Enemy
@@ -604,7 +585,8 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -17.6, y: 7.68, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1738408263529464026}
   m_Father: {fileID: 1563790583852479621}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -703,7 +685,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.3, y: 1.36}
   m_EdgeRadius: 0
---- !u!114 &1502002618
+--- !u!114 &2100938923932480581
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -712,35 +694,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1502002616}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3fb07359fae0ce549b1c2cbe838190e5, type: 3}
+  m_Script: {fileID: 11500000, guid: df11d2f3fc6fc0947817abefc87e7cc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movePattern: 3
-  straightMoveDirection: 0
-  straightMoveDistance: 0
-  bulletMovePattern: 0
-  speed: 10
-  changeDirectionPeriod: 1
-  sineAmp: 1
-  trackColor: {r: 1, g: 1, b: 1, a: 1}
-  hp: 100
-  invincible: 1
-  invincibleTime: 0
-  playDamageEffect: 0
-  explosionPrefabName: Prefabs/Effects/LoopExplosion
-  squadonManager: {fileID: 0}
-  turretMinAngle: 45
-  turretMaxAngle: 180
-  turrentSprites:
-  - {fileID: 21300156, guid: 89bdbb52b390e6d498c2d32073922631, type: 3}
-  - {fileID: 21300154, guid: 89bdbb52b390e6d498c2d32073922631, type: 3}
-  - {fileID: 21300152, guid: 89bdbb52b390e6d498c2d32073922631, type: 3}
-  - {fileID: 21300150, guid: 89bdbb52b390e6d498c2d32073922631, type: 3}
-  bulletPrefab: {fileID: 7789516539089122690, guid: d670b36201253e247a7d6236be78d5ff,
-    type: 3}
-  fireInterval: 2
-  waitForPlayer: 0
+  hurtTags: []
+  invincible: 0
+  maxHp: 100
   dropPowerUp: 1
+  drawMoveTrail: 0
+  moveSpeed: 0
+  squadonManager: {fileID: 0}
 --- !u!1 &2035018173
 GameObject:
   m_ObjectHideFlags: 0
@@ -855,8 +818,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09197f9aae2765e47ba5fe5813852034, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  openOffset: -3
-  closeOffset: -7
 --- !u!61 &866199103
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -894,7 +855,7 @@ GameObject:
   - component: {fileID: 3333710558244789903}
   - component: {fileID: 6629614304450813454}
   - component: {fileID: 2095027931037036486}
-  - component: {fileID: 8347058639943960065}
+  - component: {fileID: 8431642987667362064}
   m_Layer: 0
   m_Name: Laser (1)
   m_TagString: Enemy
@@ -912,7 +873,8 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -24.96, y: -3.7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 6277153642743790778}
   m_Father: {fileID: 1563790583852479621}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -963,7 +925,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 3.38, y: 1.06}
   m_EdgeRadius: 0
---- !u!114 &8347058639943960065
+--- !u!114 &8431642987667362064
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -972,31 +934,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 156178124571591377}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3fb07359fae0ce549b1c2cbe838190e5, type: 3}
+  m_Script: {fileID: 11500000, guid: e681b9020dda7b74c870fbe4e23fd3f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movePattern: 3
-  straightMoveDirection: 0
-  straightMoveDistance: 0
-  bulletMovePattern: 1
-  speed: 10
-  changeDirectionPeriod: 1
-  sineAmp: 1
-  trackColor: {r: 1, g: 1, b: 1, a: 1}
-  hp: 100
+  hurtTags: []
   invincible: 0
-  invincibleTime: 0
-  playDamageEffect: 0
-  explosionPrefabName: Prefabs/Effects/LoopExplosion
-  squadonManager: {fileID: 0}
-  turretMinAngle: 0
-  turretMaxAngle: 180
-  turrentSprites: []
-  bulletPrefab: {fileID: 7789516539089122690, guid: 308de4f512c229948a540f1d4a9991ed,
-    type: 3}
-  fireInterval: 2
-  waitForPlayer: 0
+  maxHp: 100
   dropPowerUp: 1
+  drawMoveTrail: 0
+  moveSpeed: 0
+  squadonManager: {fileID: 0}
 --- !u!1 &388402571291365877
 GameObject:
   m_ObjectHideFlags: 0
@@ -1028,6 +975,135 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &479769686877093079
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1738408263529464026}
+  - component: {fileID: 5750239256902241405}
+  m_Layer: 0
+  m_Name: ShotPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1738408263529464026
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 479769686877093079}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1502002617}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &5750239256902241405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 479769686877093079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72c0e76e14fa4e7448990f59311e1525, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &3048076774566242989
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 28823158638325405}
+  - component: {fileID: 7312657746194373760}
+  m_Layer: 0
+  m_Name: ShotPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &28823158638325405
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3048076774566242989}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7373051897912289833}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &7312657746194373760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3048076774566242989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72c0e76e14fa4e7448990f59311e1525, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &3131683430411387201
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5374398330786949782}
+  - component: {fileID: 7120551849788227688}
+  m_Layer: 0
+  m_Name: ShotPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5374398330786949782
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3131683430411387201}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1122311166}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &7120551849788227688
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3131683430411387201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72c0e76e14fa4e7448990f59311e1525, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3483607580771158754
 GameObject:
   m_ObjectHideFlags: 0
@@ -1148,12 +1224,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hurtTags: []
-  invincible: 1
+  invincible: 0
   maxHp: 100
   dropPowerUp: 0
   drawMoveTrail: 0
   moveSpeed: 0
   squadonManager: {fileID: 0}
+  invincibleTime: 30
 --- !u!1 &4488693924306918399
 GameObject:
   m_ObjectHideFlags: 0
@@ -1165,7 +1242,7 @@ GameObject:
   - component: {fileID: 1914722538410264673}
   - component: {fileID: 8041014034430365383}
   - component: {fileID: 5551911655494955068}
-  - component: {fileID: 1638837416021406932}
+  - component: {fileID: 2767314517005842043}
   m_Layer: 0
   m_Name: Laser (2)
   m_TagString: Enemy
@@ -1183,7 +1260,8 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -12.19, y: 11.02, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 408199724741866591}
   m_Father: {fileID: 1563790583852479621}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1234,7 +1312,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 3.38, y: 0.95}
   m_EdgeRadius: 0
---- !u!114 &1638837416021406932
+--- !u!114 &2767314517005842043
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1243,31 +1321,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 4488693924306918399}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3fb07359fae0ce549b1c2cbe838190e5, type: 3}
+  m_Script: {fileID: 11500000, guid: e681b9020dda7b74c870fbe4e23fd3f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movePattern: 3
-  straightMoveDirection: 0
-  straightMoveDistance: 0
-  bulletMovePattern: 1
-  speed: 10
-  changeDirectionPeriod: 1
-  sineAmp: 1
-  trackColor: {r: 1, g: 1, b: 1, a: 1}
-  hp: 100
+  hurtTags: []
   invincible: 0
-  invincibleTime: 0
-  playDamageEffect: 0
-  explosionPrefabName: Prefabs/Effects/LoopExplosion
-  squadonManager: {fileID: 0}
-  turretMinAngle: 0
-  turretMaxAngle: 180
-  turrentSprites: []
-  bulletPrefab: {fileID: 7789516539089122690, guid: 308de4f512c229948a540f1d4a9991ed,
-    type: 3}
-  fireInterval: 2
-  waitForPlayer: 0
+  maxHp: 100
   dropPowerUp: 1
+  drawMoveTrail: 0
+  moveSpeed: 0
+  squadonManager: {fileID: 0}
 --- !u!1 &4999380415493416896
 GameObject:
   m_ObjectHideFlags: 0
@@ -1279,7 +1342,7 @@ GameObject:
   - component: {fileID: 7373051897912289833}
   - component: {fileID: 6506056340460024555}
   - component: {fileID: 1249641963236424479}
-  - component: {fileID: 2909207375120478267}
+  - component: {fileID: 4877762161911666848}
   m_Layer: 0
   m_Name: Laser (3)
   m_TagString: Enemy
@@ -1297,7 +1360,8 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -12.16, y: -11.19, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 28823158638325405}
   m_Father: {fileID: 1563790583852479621}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1348,7 +1412,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 3.38, y: 0.95}
   m_EdgeRadius: 0
---- !u!114 &2909207375120478267
+--- !u!114 &4877762161911666848
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1357,31 +1421,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 4999380415493416896}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3fb07359fae0ce549b1c2cbe838190e5, type: 3}
+  m_Script: {fileID: 11500000, guid: e681b9020dda7b74c870fbe4e23fd3f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movePattern: 3
-  straightMoveDirection: 0
-  straightMoveDistance: 0
-  bulletMovePattern: 1
-  speed: 10
-  changeDirectionPeriod: 1
-  sineAmp: 1
-  trackColor: {r: 1, g: 1, b: 1, a: 1}
-  hp: 100
+  hurtTags: []
   invincible: 0
-  invincibleTime: 0
-  playDamageEffect: 0
-  explosionPrefabName: Prefabs/Effects/LoopExplosion
-  squadonManager: {fileID: 0}
-  turretMinAngle: 0
-  turretMaxAngle: 180
-  turrentSprites: []
-  bulletPrefab: {fileID: 7789516539089122690, guid: 308de4f512c229948a540f1d4a9991ed,
-    type: 3}
-  fireInterval: 2
-  waitForPlayer: 0
+  maxHp: 100
   dropPowerUp: 1
+  drawMoveTrail: 0
+  moveSpeed: 0
+  squadonManager: {fileID: 0}
 --- !u!1 &5235859285935106724
 GameObject:
   m_ObjectHideFlags: 0
@@ -1502,12 +1551,99 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hurtTags: []
-  invincible: 1
+  invincible: 0
   maxHp: 100
   dropPowerUp: 0
   drawMoveTrail: 0
   moveSpeed: 0
   squadonManager: {fileID: 0}
+  invincibleTime: 30
+--- !u!1 &5546240281732281552
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6277153642743790778}
+  - component: {fileID: 2915620363065755694}
+  m_Layer: 0
+  m_Name: ShotPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6277153642743790778
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5546240281732281552}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3333710558244789903}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &2915620363065755694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5546240281732281552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72c0e76e14fa4e7448990f59311e1525, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &5739729897617864622
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5932459677869905629}
+  - component: {fileID: 2946033091972522909}
+  m_Layer: 0
+  m_Name: ShotPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5932459677869905629
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5739729897617864622}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2458524672405411465}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &2946033091972522909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5739729897617864622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72c0e76e14fa4e7448990f59311e1525, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5871493656620948627
 GameObject:
   m_ObjectHideFlags: 0
@@ -1628,12 +1764,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hurtTags: []
-  invincible: 1
+  invincible: 0
   maxHp: 100
   dropPowerUp: 0
   drawMoveTrail: 0
   moveSpeed: 0
   squadonManager: {fileID: 0}
+  invincibleTime: 30
 --- !u!1 &6431474340246680046
 GameObject:
   m_ObjectHideFlags: 0
@@ -1754,12 +1891,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hurtTags: []
-  invincible: 1
+  invincible: 0
   maxHp: 100
   dropPowerUp: 0
   drawMoveTrail: 0
   moveSpeed: 0
   squadonManager: {fileID: 0}
+  invincibleTime: 30
 --- !u!1 &6728022266808857700
 GameObject:
   m_ObjectHideFlags: 0
@@ -1880,12 +2018,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hurtTags: []
-  invincible: 1
+  invincible: 0
   maxHp: 100
   dropPowerUp: 0
   drawMoveTrail: 0
   moveSpeed: 0
   squadonManager: {fileID: 0}
+  invincibleTime: 30
 --- !u!1 &7273041170097840275
 GameObject:
   m_ObjectHideFlags: 0
@@ -1897,7 +2036,7 @@ GameObject:
   - component: {fileID: 2458524672405411465}
   - component: {fileID: 8571176793903608852}
   - component: {fileID: 1874743659275536123}
-  - component: {fileID: 136428488791696960}
+  - component: {fileID: 7837748690515934988}
   m_Layer: 0
   m_Name: Laser
   m_TagString: Enemy
@@ -1915,7 +2054,8 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -24.96, y: 3.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 5932459677869905629}
   m_Father: {fileID: 1563790583852479621}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1966,7 +2106,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 3.38, y: 1.03}
   m_EdgeRadius: 0
---- !u!114 &136428488791696960
+--- !u!114 &7837748690515934988
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1975,31 +2115,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 7273041170097840275}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3fb07359fae0ce549b1c2cbe838190e5, type: 3}
+  m_Script: {fileID: 11500000, guid: e681b9020dda7b74c870fbe4e23fd3f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movePattern: 3
-  straightMoveDirection: 0
-  straightMoveDistance: 0
-  bulletMovePattern: 1
-  speed: 10
-  changeDirectionPeriod: 1
-  sineAmp: 1
-  trackColor: {r: 1, g: 1, b: 1, a: 1}
-  hp: 100
+  hurtTags: []
   invincible: 0
-  invincibleTime: 0
-  playDamageEffect: 0
-  explosionPrefabName: Prefabs/Effects/LoopExplosion
-  squadonManager: {fileID: 0}
-  turretMinAngle: 0
-  turretMaxAngle: 180
-  turrentSprites: []
-  bulletPrefab: {fileID: 7789516539089122690, guid: 308de4f512c229948a540f1d4a9991ed,
-    type: 3}
-  fireInterval: 2
-  waitForPlayer: 0
+  maxHp: 100
   dropPowerUp: 1
+  drawMoveTrail: 0
+  moveSpeed: 0
+  squadonManager: {fileID: 0}
 --- !u!1 &7814002399154268554
 GameObject:
   m_ObjectHideFlags: 0
@@ -2330,12 +2455,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hurtTags: []
-  invincible: 1
+  invincible: 0
   maxHp: 100
   dropPowerUp: 0
   drawMoveTrail: 0
   moveSpeed: 0
   squadonManager: {fileID: 0}
+  invincibleTime: 30
 --- !u!61 &427796587
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2388,6 +2514,49 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.97, y: 15.37}
   m_EdgeRadius: 0
+--- !u!1 &8763652005549408006
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 408199724741866591}
+  - component: {fileID: 8321589845700719014}
+  m_Layer: 0
+  m_Name: ShotPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &408199724741866591
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8763652005549408006}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1914722538410264673}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &8321589845700719014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8763652005549408006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72c0e76e14fa4e7448990f59311e1525, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7277475755432415365
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2487,15 +2656,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2275ef319e61ed2408c7da19951365e0, type: 3}
---- !u!4 &8092430526644598330 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1490936755501442751, guid: 2275ef319e61ed2408c7da19951365e0,
-    type: 3}
-  m_PrefabInstance: {fileID: 7277475755432415365}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &8092430526644598308 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1490936755501442721, guid: 2275ef319e61ed2408c7da19951365e0,
+    type: 3}
+  m_PrefabInstance: {fileID: 7277475755432415365}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8092430526644598330 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1490936755501442751, guid: 2275ef319e61ed2408c7da19951365e0,
     type: 3}
   m_PrefabInstance: {fileID: 7277475755432415365}
   m_PrefabAsset: {fileID: 0}

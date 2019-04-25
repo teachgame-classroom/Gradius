@@ -242,6 +242,21 @@ public class Player : Character
         finalSpeed = moveSpeed + speedLevel * 2;
     }
 
+    protected override void OnTriggerEnter2D(Collider2D collision)
+    {
+        base.OnTriggerEnter2D(collision);
+
+        if (collision.tag == "PowerUp")
+        {
+            powerup++;
+            if (powerup > 6)
+            {
+                powerup = 1;
+            }
+            Destroy(collision.gameObject);
+        }
+    }
+
     private void OnGUI()
     {
         GUILayout.BeginVertical();

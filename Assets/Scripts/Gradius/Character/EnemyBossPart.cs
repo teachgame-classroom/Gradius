@@ -25,4 +25,9 @@ public class EnemyBossPart : EnemyBase
     {
         dieEffect = Resources.Load<GameObject>("Prefabs/Effects/LoopExplosion");
     }
+
+    public override void Die()
+    {
+        DoBeforeDie();
+    }
 }
