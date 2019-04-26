@@ -151,6 +151,11 @@ public class Player : Character
 
     void TryPowerUp()
     {
+        if(powerup > 0)
+        {
+            UIManager.instance.OnPowerup();
+        }
+
         switch (powerup)
         {
             case 1:
@@ -242,6 +247,13 @@ public class Player : Character
         finalSpeed = moveSpeed + speedLevel * 2;
     }
 
+    public override void Die()
+    {
+        powerup = 0;
+        UIManager.instance.OnPowerupChanged(powerup);
+        base.Die();
+    }
+
     protected override void OnTriggerEnter2D(Collider2D collision)
     {
         base.OnTriggerEnter2D(collision);
@@ -253,6 +265,9 @@ public class Player : Character
             {
                 powerup = 1;
             }
+
+            UIManager.instance.OnPowerupChanged(powerup);
+
             Destroy(collision.gameObject);
         }
     }
