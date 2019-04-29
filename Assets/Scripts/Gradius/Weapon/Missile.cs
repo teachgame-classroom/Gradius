@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Missile : Weapon
 {
-    public int level { get; protected set; }
+    public int level { get; set; }
 
     protected override float fireInterval
     {

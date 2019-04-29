@@ -27,13 +27,19 @@ public class UIManager : MonoBehaviour
     private Image[] optionImages;
     private Image[] barrierImages;
 
+    private Text lifeText;
+    private Text nameText;
+    private Text scoreText;
+    private Text hiscoreText;
+
     private int[] weaponStates = new int[6];
     private KeyCode[] testKeys = new KeyCode[] { KeyCode.Alpha1, KeyCode.Alpha2, KeyCode.Alpha3, KeyCode.Alpha4, KeyCode.Alpha5, KeyCode.Alpha6 };
 
     private int currentPowerupPanelIdx = -1;
     private int testPowerup = 0;
-    // Start is called before the first frame update
-    void Start()
+
+    // Awake 是比 Start 更早执行的初始化方法
+    void Awake()
     {
         speedupImages = GetWeaponImages(weaponNames[0]);
         missileImages = GetWeaponImages(weaponNames[1]);
@@ -41,6 +47,20 @@ public class UIManager : MonoBehaviour
         laserImages = GetWeaponImages(weaponNames[3]);
         optionImages = GetWeaponImages(weaponNames[4]);
         barrierImages = GetWeaponImages(weaponNames[5]);
+
+        // 查找子对象的第一种写法
+        lifeText = transform.Find("StatusPanel").Find("Life").GetComponent<Text>();
+
+        // 查找子对象的第二种写法
+        nameText = transform.Find("StatusPanel/PlayerName").GetComponent<Text>();
+
+        scoreText = transform.Find("StatusPanel/Score").GetComponent<Text>();
+        hiscoreText = transform.Find("StatusPanel/HiScore").GetComponent<Text>();
+
+        OnLifeChanged(99);
+        OnPlayerNameChanged("CGWANG");
+        OnScoreChanged(12345);
+        OnHiScoreChanged(98765);
     }
 
     // Update is called once per frame
@@ -179,4 +199,28 @@ public class UIManager : MonoBehaviour
         currentPowerupPanelIdx = powerupLevel - 1;
     }
 
+    public void OnLifeChanged(int life)
+    {
+        lifeText.text = life.ToString();
+    }
+
+    public void OnPlayerNameChanged(string playerName)
+    {
+        nameText.text = playerName;
+    }
+
+    public void OnScoreChanged(int score)
+    {
+        scoreText.text = score.ToString("D7");
+    }
+
+    public void OnHiScoreChanged(int hiscore)
+    {
+        hiscoreText.text = hiscore.ToString("D7");
+    }
+
+    public void OnGameOver()
+    {
+        Debug.Log("Game Over");
+    }
 }

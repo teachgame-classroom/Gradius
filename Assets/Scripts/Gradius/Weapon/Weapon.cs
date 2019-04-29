@@ -16,6 +16,9 @@ public abstract class Weapon
 
     protected ObjectPool bulletPool;
 
+    protected string fireClipName = "Sound Effect (6)";
+    protected AudioClip fireClip;
+
     public Weapon(int bulletPrefabIndex, Transform[] shotPosTrans, bool isPlayerWeapon)
     {
         string bulletPrefabPath = "Prefabs/Bullets/Bullet_" + bulletPrefabIndex;
@@ -35,6 +38,9 @@ public abstract class Weapon
         this.isPlayerWeapon = isPlayerWeapon;
 
         bulletPool = new ObjectPool(bulletPrefab, 30);
+
+        fireClip = Resources.Load<AudioClip>("Sounds/" + fireClipName);
+        Debug.Log(fireClip.name);
     }
 
     public void TryShoot()
@@ -64,13 +70,14 @@ public abstract class Weapon
 
         for(int i = 0; i < shotPosTrans.Length; i++)
         {
-
             if(i <= optionLevel)
             {
                 Debug.Log("Shoot:" + i);
                 Shoot(shotPosTrans[i]);
             }
         }
+
+        AudioSource.PlayClipAtPoint(fireClip, Camera.main.transform.position);
         //GameObject.Instantiate(bulletPrefab, shotPosTrans.position, shotPosTrans.rotation);
     }
 

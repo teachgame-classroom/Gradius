@@ -540,6 +540,7 @@ TextureImporter:
     21301070: Arcade - Gradius - Everything_535
     21301072: Arcade - Gradius - Everything_536
     21301074: Arcade - Gradius - Everything_537
+    21301076: Arcade - Gradius - Everything_1
   externalObjects: {}
   serializedVersion: 9
   mipmaps:
@@ -8340,7 +8341,7 @@ TextureImporter:
         serializedVersion: 2
         x: 286
         y: 159
-        width: 14
+        width: 8
         height: 8
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -9138,9 +9139,9 @@ TextureImporter:
       name: Arcade - Gradius - Everything_431
       rect:
         serializedVersion: 2
-        x: 129
+        x: 72
         y: 115
-        width: 22
+        width: 79
         height: 19
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -9415,26 +9416,6 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Arcade - Gradius - Everything_445
-      rect:
-        serializedVersion: 2
-        x: 72
-        y: 119
-        width: 43
-        height: 8
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e3b127587227dab4680f873674f1e070
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: Arcade - Gradius - Everything_446
       rect:
         serializedVersion: 2
@@ -9450,26 +9431,6 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 5ff9a80f2f6f7114ca7a55565a569eea
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Arcade - Gradius - Everything_447
-      rect:
-        serializedVersion: 2
-        x: 119
-        y: 119
-        width: 8
-        height: 8
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c8a6683bdba301c41a01b4cccc02edd7
       vertices: []
       indices: 
       edges: []
@@ -11310,6 +11271,26 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: dc5007ba905eee94bb3f3fd18ee968ce
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arcade - Gradius - Everything_1
+      rect:
+        serializedVersion: 2
+        x: 296
+        y: 159
+        width: 5
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5924ac11308900e42a10df8e0b6b7f54
       vertices: []
       indices: 
       edges: []

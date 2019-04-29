@@ -137,6 +137,7 @@ MonoBehaviour:
   dropPowerUp: 0
   drawMoveTrail: 0
   moveSpeed: 0
+  score: 10000
   squadonManager: {fileID: 0}
   invincibleTime: 30
 --- !u!1 &1122311165
@@ -287,6 +288,7 @@ MonoBehaviour:
   dropPowerUp: 1
   drawMoveTrail: 0
   moveSpeed: 0
+  score: 2000
   squadonManager: {fileID: 0}
 --- !u!1 &1210849912
 GameObject:
@@ -413,6 +415,7 @@ MonoBehaviour:
   dropPowerUp: 0
   drawMoveTrail: 0
   moveSpeed: 0
+  score: 500
   squadonManager: {fileID: 0}
   invincibleTime: 30
 --- !u!1 &1251734862
@@ -703,6 +706,7 @@ MonoBehaviour:
   dropPowerUp: 1
   drawMoveTrail: 0
   moveSpeed: 0
+  score: 2000
   squadonManager: {fileID: 0}
 --- !u!1 &2035018173
 GameObject:
@@ -943,6 +947,7 @@ MonoBehaviour:
   dropPowerUp: 1
   drawMoveTrail: 0
   moveSpeed: 0
+  score: 1000
   squadonManager: {fileID: 0}
 --- !u!1 &388402571291365877
 GameObject:
@@ -1229,6 +1234,7 @@ MonoBehaviour:
   dropPowerUp: 0
   drawMoveTrail: 0
   moveSpeed: 0
+  score: 500
   squadonManager: {fileID: 0}
   invincibleTime: 30
 --- !u!1 &4488693924306918399
@@ -1330,6 +1336,7 @@ MonoBehaviour:
   dropPowerUp: 1
   drawMoveTrail: 0
   moveSpeed: 0
+  score: 1000
   squadonManager: {fileID: 0}
 --- !u!1 &4999380415493416896
 GameObject:
@@ -1430,6 +1437,7 @@ MonoBehaviour:
   dropPowerUp: 1
   drawMoveTrail: 0
   moveSpeed: 0
+  score: 1000
   squadonManager: {fileID: 0}
 --- !u!1 &5235859285935106724
 GameObject:
@@ -1556,6 +1564,7 @@ MonoBehaviour:
   dropPowerUp: 0
   drawMoveTrail: 0
   moveSpeed: 0
+  score: 500
   squadonManager: {fileID: 0}
   invincibleTime: 30
 --- !u!1 &5546240281732281552
@@ -1769,6 +1778,7 @@ MonoBehaviour:
   dropPowerUp: 0
   drawMoveTrail: 0
   moveSpeed: 0
+  score: 500
   squadonManager: {fileID: 0}
   invincibleTime: 30
 --- !u!1 &6431474340246680046
@@ -1896,6 +1906,7 @@ MonoBehaviour:
   dropPowerUp: 0
   drawMoveTrail: 0
   moveSpeed: 0
+  score: 500
   squadonManager: {fileID: 0}
   invincibleTime: 30
 --- !u!1 &6728022266808857700
@@ -2023,6 +2034,7 @@ MonoBehaviour:
   dropPowerUp: 0
   drawMoveTrail: 0
   moveSpeed: 0
+  score: 500
   squadonManager: {fileID: 0}
   invincibleTime: 30
 --- !u!1 &7273041170097840275
@@ -2124,6 +2136,7 @@ MonoBehaviour:
   dropPowerUp: 1
   drawMoveTrail: 0
   moveSpeed: 0
+  score: 1000
   squadonManager: {fileID: 0}
 --- !u!1 &7814002399154268554
 GameObject:
@@ -2334,6 +2347,7 @@ MonoBehaviour:
   dropPowerUp: 0
   drawMoveTrail: 0
   moveSpeed: 0
+  score: 100
   squadonManager: {fileID: 0}
 --- !u!1 &7935825745249934378
 GameObject:
@@ -2460,6 +2474,7 @@ MonoBehaviour:
   dropPowerUp: 0
   drawMoveTrail: 0
   moveSpeed: 0
+  score: 500
   squadonManager: {fileID: 0}
   invincibleTime: 30
 --- !u!61 &427796587

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Character : MonoBehaviour
+public abstract class Character : MonoBehaviour
 {
     public string[] hurtTags;
 
@@ -27,6 +27,9 @@ public class Character : MonoBehaviour
     protected GameObject dieEffect;
 
     protected GameObject powerUpPrefab;
+
+    protected abstract string deathClipName { get; }
+    protected AudioClip deathClip;
 
     // Start is called before the first frame update
     protected virtual void Start()
@@ -59,6 +62,8 @@ public class Character : MonoBehaviour
         {
             powerUpPrefab = Resources.Load<GameObject>("Prefabs/PowerUp");
         }
+
+        deathClip = Resources.Load<AudioClip>("Sounds/" + deathClipName);
     }
 
     protected virtual void InitWeapon()
@@ -140,7 +145,7 @@ public class Character : MonoBehaviour
         Destroy(gameObject);
     }
 
-    protected void DoBeforeDie()
+    protected virtual void DoBeforeDie()
     {
         if (dropPowerUp)
         {
@@ -153,6 +158,8 @@ public class Character : MonoBehaviour
         }
 
         GetComponentInChildren<Collider2D>().enabled = false;
+
+        AudioSource.PlayClipAtPoint(deathClip, Camera.main.transform.position);
     }
 
     protected void RecordMoveTrail()

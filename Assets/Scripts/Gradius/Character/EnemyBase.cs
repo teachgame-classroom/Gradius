@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class EnemyBase : Character
 {
+    public int score = 100;
     public SquadonManager squadonManager;
+
+    protected override string deathClipName { get { return "Sound Effect (7)"; } }
 
     // Start is called before the first frame update
     protected override void Start()
@@ -40,5 +43,11 @@ public class EnemyBase : Character
         {
             base.Move();
         }
+    }
+
+    protected override void DoBeforeDie()
+    {
+        base.DoBeforeDie();
+        GameController.instance.AddScore(score);
     }
 }

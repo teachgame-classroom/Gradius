@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Player : Character
 {
+    protected const int START_LIFE = 99;
+
     protected const int KEY_W = 0;
     protected const int KEY_S = 1;
     protected const int KEY_A = 2;
@@ -26,8 +28,22 @@ public class Player : Character
     protected float speedLevel = 0;
     protected int optionLevel = 0;
 
+    public int life { get; protected set; }
+
+    protected override string deathClipName { get { return "Sound Effect (17)"; } }
+
+    protected string getPowerupClipName = "Sound Effect (11)";
+    protected AudioClip getPowerupClip;
+
+    protected string powerupClipName = "Sound Effect (14)";
+    protected AudioClip powerupClip;
+
     private List<Vector3> trackList = new List<Vector3>();
     private float trackNodeDistance = 0.04f * 0.04f;
+    private Transform spawnTrans;
+    private float lastSpawnTime;
+    private bool isAutoPilot = true;
+    private float lastBlinkTime;
 
     // Start is called before the first frame update
     protected override void Start()
@@ -40,7 +56,11 @@ public class Player : Character
     // Update is called once per frame
     protected override void Update()
     {
+        InvincibleAfterSpawn();
+        Debug.Log("InvincibleAfterSpawn");
+
         UpdateKeyState();
+        Debug.Log("UpdateKeyState");
 
         bool powerupKeyDown = keyState[KEY_K];
 
@@ -51,7 +71,7 @@ public class Player : Character
 
         UpdateTrackList();
 
-        Debug.Log(finalSpeed);
+        Debug.Log("Final Speed:" + finalSpeed);
 
         shotPosTrans[1].position = Vector3.MoveTowards(shotPosTrans[1].position, trackList[trackList.Count / 2], finalSpeed * Time.deltaTime);
         shotPosTrans[2].position = Vector3.MoveTowards(shotPosTrans[2].position, trackList[0], finalSpeed * Time.deltaTime);
@@ -63,10 +83,14 @@ public class Player : Character
     {
         base.InitCharacter();
 
+        invincible = true;
+
         powerup = 0;
         speedLevel = 0;
         optionLevel = 0;
 
+        life = START_LIFE;
+        UIManager.instance.OnLifeChanged(life);
         SetSpeed();
 
         SetBarrierActive(false);
@@ -77,6 +101,11 @@ public class Player : Character
         }
 
         dieEffect = Resources.Load<GameObject>("Prefabs/Effects/Explosion_player");
+        getPowerupClip = Resources.Load<AudioClip>("Sounds/" + getPowerupClipName);
+        powerupClip = Resources.Load<AudioClip>("Sounds/" + powerupClipName);
+
+
+        spawnTrans = Camera.main.transform.Find("PlayerSpawn");
     }
 
     protected override void InitWeapon()
@@ -98,14 +127,32 @@ public class Player : Character
 
     protected override void Move()
     {
-        Vector3 moveDirection = Vector3.zero;
+        if (isAutoPilot)
+        {
+            if (Time.time - lastSpawnTime > 1)
+            {
+                Move(Vector3.right);
 
-        if (keyState[KEY_W]) moveDirection += Vector3.up;
-        if (keyState[KEY_S]) moveDirection += Vector3.down;
-        if (keyState[KEY_A]) moveDirection += Vector3.left;
-        if (keyState[KEY_D]) moveDirection += Vector3.right;
+                float distanceToCamera = Camera.main.transform.position.x - transform.position.x;
+                float distanceToExitSpawnState = Camera.main.orthographicSize * Camera.main.aspect * 0.75f;
+                if (distanceToCamera < distanceToExitSpawnState)
+                {
+                    isAutoPilot = false;
+                }
+            }
+        }
+        else
+        {
+            Vector3 moveDirection = Vector3.zero;
 
-        Move(moveDirection);
+            if (keyState[KEY_W]) moveDirection += Vector3.up;
+            if (keyState[KEY_S]) moveDirection += Vector3.down;
+            if (keyState[KEY_A]) moveDirection += Vector3.left;
+            if (keyState[KEY_D]) moveDirection += Vector3.right;
+
+            Move(moveDirection);
+        }
+
     }
 
     protected override void Shoot()
@@ -126,6 +173,28 @@ public class Player : Character
             }
 
             base.Shoot();
+        }
+    }
+
+    protected void InvincibleAfterSpawn()
+    {
+        // 重生5秒后打开碰撞体，使玩家可以被伤害
+        if (Time.time - lastSpawnTime < 5)
+        {
+            if (Time.time - lastBlinkTime > 0.1f)
+            {
+                spriteRenderer.enabled = !spriteRenderer.enabled;
+                lastBlinkTime = Time.time;
+            }
+        }
+        else
+        {
+            if (invincible)
+            {
+                spriteRenderer.enabled = true;
+                invincible = false;
+                //col.enabled = true;
+            }
         }
     }
 
@@ -154,6 +223,7 @@ public class Player : Character
         if(powerup > 0)
         {
             UIManager.instance.OnPowerup();
+            AudioSource.PlayClipAtPoint(powerupClip, Camera.main.transform.position);
         }
 
         switch (powerup)
@@ -249,9 +319,46 @@ public class Player : Character
 
     public override void Die()
     {
+        life--;
+        UIManager.instance.OnLifeChanged(life);
+
         powerup = 0;
         UIManager.instance.OnPowerupChanged(powerup);
-        base.Die();
+        DoBeforeDie();
+
+        if(life > 0)
+        {
+            Spawn();
+        }
+        else
+        {
+            // Game Over
+            gameObject.SetActive(false);
+            UIManager.instance.OnGameOver();
+        }
+    }
+
+    void Spawn()
+    {
+        hp = maxHp;
+        powerup = 0;
+        speedLevel = 0;
+        missile.level = 0;
+        optionLevel = 0;
+        
+        currentWeaponIdx = 0;
+        currentWeapon = weapons[currentWeaponIdx];
+
+        SetSpeed();
+
+        SetBarrierActive(false);
+        SetOptionActive(false);
+        transform.position = spawnTrans.position;
+        isAutoPilot = true;
+        invincible = true;
+
+        GetComponentInChildren<Collider2D>().enabled = true;
+        lastSpawnTime = Time.time;
     }
 
     protected override void OnTriggerEnter2D(Collider2D collision)
@@ -266,9 +373,11 @@ public class Player : Character
                 powerup = 1;
             }
 
+            GameController.instance.AddScore(500);
             UIManager.instance.OnPowerupChanged(powerup);
-
             Destroy(collision.gameObject);
+
+            AudioSource.PlayClipAtPoint(getPowerupClip, Camera.main.transform.position);
         }
     }
 
